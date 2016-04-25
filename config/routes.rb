@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   post "login", to: "registrations#login"
   delete "registration", to: "registrations#destroy"
 
+  get 'oauth', to: 'oauth#new', as: 'oauth' # oauth_url oauth_path
+  get 'oauth/authorize', to: 'oauth#create', as: 'authorize'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
