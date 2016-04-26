@@ -4,6 +4,7 @@ Initial setup, fill this in more later
 
 ## General Rules
 
+Heroku Site: hockeydoctor.herokuapp.com
 
 ### Authorization
 
