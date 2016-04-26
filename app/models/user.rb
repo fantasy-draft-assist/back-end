@@ -25,12 +25,5 @@ class User < ActiveRecord::Base
 		end
 		token
 	end
-
-	def maybe_refresh_token!
-		if self.expires_at <= DateTime.now
-			response = HTTParty.post("", body: { refresh_token: "whatever"} )
-			self.update(y_access_token: response["access_token"])
-		end
-	end
 end
 
