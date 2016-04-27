@@ -54,7 +54,6 @@ class YahooApi
 	def update_user_token(response)
 		@user.update(y_access_token: response["access_token"],
 			y_token_type: response["token_type"],
-			y_expires_at: DateTime.now + response["expires_in"].seconds,
 			y_refresh_token: response["refresh_token"])
 		if response["expires_in"].present?
 			@user.update(y_expires_at: DateTime.now + response["expires_in"].seconds)
