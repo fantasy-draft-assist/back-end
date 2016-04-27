@@ -29,7 +29,7 @@ class YahooApi
 			response_type: "code",
 			redirect_uri: "#{REDIR_BASE_URI}/oauth/#{@user.id}/authorize"
 		}
-		"#{OAUTH_BASE_URI}/request_token?#{options.to_query}"
+		"#{OAUTH_BASE_URI}/request_auth?#{options.to_query}"
 	end
 
 	def oauth_get_token(code)
