@@ -8,7 +8,7 @@ class OauthController < ApplicationController
 
 	def create
 		code = params[:code]
-		@user = User.find(params[:id])
+		@user = User.find(params[:user_id])
 		@api = YahooApi.new(@user)
 		@api.oauth_get_token(code)
 		render json: { user: @user.as_json(only: [:y_access_token, :y_refresh_token]) },
