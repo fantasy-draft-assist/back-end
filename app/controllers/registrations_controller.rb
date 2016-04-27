@@ -4,7 +4,8 @@ class RegistrationsController < ApplicationController
 	def create
 		@user = User.new(username: params["username"],
 						email: params["email"],
-						password: params["password"])
+						password: params["password"],
+						favorite_team: params["favorite_team"])
 		@user.ensure_auth_token
 		if @user.save
 			render json: { user: @user.as_json(only:
