@@ -58,7 +58,7 @@ class YahooApi
 		if response["expires_in"].present?
 			@user.update(y_expires_at: DateTime.now + response["expires_in"].seconds)
 		else
-			logger.warn "No Expiration data in response: \n#{response}\n\n"
+			Rails.logger.warn "No Expiration data in response: \n#{response}\n\n"
 		end
 	end
 
