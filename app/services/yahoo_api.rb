@@ -37,7 +37,7 @@ class YahooApi
 		params.merge!({ "code": code })
 		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 			headers: oauth_headers)
-		self.update_user_token(response)
+		update_user_token(response)
 	end
 
 	def refresh_token!
@@ -46,7 +46,7 @@ class YahooApi
 			params.merge!({ "refresh_token": @user.y_refresh_token })
 			response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 					headers: oauth_headers)
-			self.update_user_token(response)
+			update_user_token(response)
 		end
 	end
 
