@@ -1,7 +1,7 @@
 class OauthController < ApplicationController
 
 	def new
-		@user = User.find(params[:id])
+		@user = User.find(params[:user_id])
 		@api = YahooApi.new(@user)
 		redirect_to @api.oauth_request_url
 	end
