@@ -35,7 +35,7 @@ class YahooApi
 	def oauth_get_token(code)
 		params = oauth_params('authorization_code')
 		params.merge!({ "code": code })
-		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", query: params,
+		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 			headers: oauth_headers)
 		update_user_token(response)
 	end
@@ -44,7 +44,7 @@ class YahooApi
 		if @user.y_expires_at <= DateTime.now
 			params = oauth_params('refresh_token')
 			params.merge!({ "refresh_token": @user.y_refresh_token })
-			response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", query: params,
+			response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 					headers: oauth_headers)
 			update_user_token(response)
 		end
@@ -76,7 +76,8 @@ class YahooApi
 		secret_id = ENV["YAHOO_SECRET_ID"]
 		encoded = Base64.encode64("#{client_id}:#{secret_id}")
 		{
-			"Authorization" => "Basic #{encoded}"
+			"Authorization" => "Basic #{encoded}",
+			"Content-Type"  => "application/x-www-form-urlencoded"
 		}
 	end
 end
