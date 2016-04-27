@@ -3,7 +3,7 @@ class RegistrationsController < ApplicationController
 
 	def create
 		@user = User.new(username: params["username"],
-						email: params["email"]
+						email: params["email"],
 						password: params["password"])
 		@user.ensure_auth_token
 		if @user.save
