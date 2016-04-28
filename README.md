@@ -59,9 +59,20 @@ Returns 200 OK on Success and 401 Unauthorized in case of failure.
 **Request**
 ```
 {
-	"username": "Bob"
+	"username": "boston"
+	"password": "bruins"
 }
 ```
+
+**Response**
+```
+{
+	"user" {
+		"id": 5,
+		"username": "boston",
+		"auth_token": "60e6cad67999b5127746026b7019fa99"
+	}
+}
 
 #### DELETE /registration
 
@@ -77,4 +88,11 @@ Returns 202 Accepted on Success and 401 Unauthorized in case of failure.
 {
 	"username": "Bob"
 }
+```
+
+**Response**
+```
+	{
+	"User Destroyed."
+	}
 ```
