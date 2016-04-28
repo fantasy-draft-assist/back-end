@@ -1,9 +1,8 @@
 class User < ActiveRecord::Base
 	has_secure_password
 
-	#has_many fantasyteams
-	#has_many leagues
-	#has_many drafts
+	has_many :teams
+	has_many :drafts
 
 	validates :email, presence: true, uniqueness: true,
 		format: {
@@ -11,6 +10,8 @@ class User < ActiveRecord::Base
 			message: "USE VALID EMAIL FORMAT."
 		}
 	validates :auth_token, presence: true
+
+	validates :username, presence: true, uniqueness: true
 
 	def ensure_auth_token
 		unless self.auth_token
