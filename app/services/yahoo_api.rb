@@ -31,6 +31,7 @@ class YahooApi
 			redirect_uri: "#{REDIR_BASE_URI}/oauth/#{@user.id}/authorize"
 		}
 		"#{OAUTH_BASE_URI}/request_auth?#{options.to_query}"
+		binding.pry
 	end
 
 	def oauth_get_token(code)
@@ -38,7 +39,6 @@ class YahooApi
 		params.merge!({ "code": code })
 		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 			headers: oauth_headers)
-		response = URI.encode_www_form(response)
 		update_user_token(response)
 	end
 
@@ -48,7 +48,6 @@ class YahooApi
 			params.merge!({ "refresh_token": @user.y_refresh_token })
 			response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 					headers: oauth_headers)
-			response = URI.encode_www_form(response)
 			update_user_token(response)
 		end
 	end
