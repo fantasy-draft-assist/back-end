@@ -77,8 +77,6 @@ class YahooApi
 		encoded = Base64.encode64("#{client_id}:#{secret_id}")
 		{
 			"Authorization" => "Basic #{encoded}",
-			"Content-Type"  => "application/x-www-form-urlencoded",
-			"Accept" => "application/x-www-form-urlencoded",
 		}
 	end
 end
