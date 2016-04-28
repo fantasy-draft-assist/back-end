@@ -35,7 +35,8 @@ class YahooApi
 	def oauth_get_token(code)
 		params = oauth_params('authorization_code')
 		params.merge!({ "code": code })
-		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params.to_query,
+		x = encode_www_form(params)
+		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: x,
 			headers: oauth_headers)
 		update_user_token(response)
 	end
@@ -44,7 +45,8 @@ class YahooApi
 		if @user.y_expires_at <= DateTime.now
 			params = oauth_params('refresh_token')
 			params.merge!({ "refresh_token": @user.y_refresh_token })
-			response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params.to_query,
+			x = encode_www_form(params)
+			response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: x,
 					headers: oauth_headers)
 			update_user_token(response)
 		end
