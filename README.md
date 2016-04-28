@@ -42,8 +42,7 @@ Returns 201 Created on Success and 422 Unprocessable Entity in case of failure.
 	"user": {
 		"username": "bob",
 		"email": "bob@bob.bob",
-		"auth_token": "c92692fd6c686ef6985b8eb124d37488",
-		"favorite_team": "Boston Bruins"
+		"auth_token": "c92692fd6c686ef6985b8eb124d37488"
 	}
 }
 ```
@@ -71,7 +70,8 @@ Returns 200 OK on Success and 401 Unauthorized in case of failure.
 	"user" {
 		"id": 5,
 		"username": "boston",
-		"auth_token": "60e6cad67999b5127746026b7019fa99"
+		"auth_token": "60e6cad67999b5127746026b7019fa99",
+		"favorite_team": "Boston Bruins"
 	}
 }
 ```
