@@ -68,7 +68,7 @@ class YahooApi
 		{
 			client_id: ENV["YAHOO_CLIENT_ID"],
 			client_secret: ENV["YAHOO_SECRET_ID"],
-			redirect_uri: "oob", #{heroku app}
+			redirect_uri: REDIR_BASE_URI, #{heroku app}
 			grant_type: grant_type
 		}
 	end
