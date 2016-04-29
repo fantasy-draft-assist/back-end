@@ -76,7 +76,7 @@ class YahooApi
 	def oauth_headers
 		client_id = ENV["YAHOO_CLIENT_ID"]
 		secret_id = ENV["YAHOO_SECRET_ID"]
-		encoded = Base64.encode64("#{client_id}:#{secret_id}")
+		encoded = Base64.encode64("#{client_id}#{secret_id}")
 		Rails.logger.warn "Base64 Code = #{encoded}"
 		{
 			"authorization" => "Basic #{encoded}",
