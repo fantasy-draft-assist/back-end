@@ -1,9 +1,8 @@
 class YahooApi
 	include HTTParty
-	require 'uri'
 
-	OAUTH_BASE_URI = URI("https://api.login.yahoo.com/oauth2")
-	REDIR_BASE_URI = URI("https://hockeydoctor.herokuapp.com")
+	OAUTH_BASE_URI = "https://api.login.yahoo.com/oauth2"
+	REDIR_BASE_URI = "https://hockeydoctor.herokuapp.com"
 
 	def initialize(user)
 		@user = user
