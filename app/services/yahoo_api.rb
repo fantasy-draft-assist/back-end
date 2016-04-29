@@ -34,7 +34,7 @@ class YahooApi
 	end
 
 	def oauth_get_token(code)
-	  params = oauth_params('authorization_code')
+	  params = oauth_params("authorization_code")
 	  Rails.logger.warn"code:#{code}   params:#{params}"
 	  params.merge!({ "code": code })
 	  response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
@@ -68,7 +68,7 @@ class YahooApi
 		{
 			client_id: ENV["YAHOO_CLIENT_ID"],
 			client_secret: ENV["YAHOO_SECRET_ID"],
-			redirect_uri: REDIR_BASE_URI, #{heroku app}
+			redirect_uri: "oob", #{heroku app}
 			grant_type: grant_type
 		}
 	end
@@ -77,9 +77,9 @@ class YahooApi
 		client_id = ENV["YAHOO_CLIENT_ID"]
 		secret_id = ENV["YAHOO_SECRET_ID"]
 		encoded = Base64.encode64("#{client_id}:#{secret_id}")
+		Rails.logger.warn "Base64 Code = #{encoded}"
 		{
-			"Authorization" => "Basic #{encoded}",
-			"content-type" => 'application/x-www-form-urlencoded',
+			"authorization" => "Basic #{encoded}",
 		}
 	end
 end
