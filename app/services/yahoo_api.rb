@@ -50,8 +50,13 @@ class YahooApi
 	  http.use_ssl = true
 	  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
+	  	client_id = ENV["YAHOO_CLIENT_ID"]
+		secret_id = ENV["YAHOO_SECRET_ID"]
+		encoded = Base64.encode64("#{client_id}:#{secret_id}")
+
 	request = Net::HTTP::Post.new(url)
-	request["authorization"] = 'Basic ZGoweUptazljazFUWmpSaE5XTTJiME5tSm1ROVdWZHJPVlpGU1RWaU1FNUpUa1JKYldOSGJ6bE5RUzB0Sm5NOVkyOXVjM1Z0WlhKelpXTnlaWFFtZUQwM01nLS06NjdkNWMyYjQwYmVmZDM1NThiMzhlNWY1NGM0NDBkZWY2ODc1YzZhNw=='
+	#request["authorization"] = 'Basic ZGoweUptazljazFUWmpSaE5XTTJiME5tSm1ROVdWZHJPVlpGU1RWaU1FNUpUa1JKYldOSGJ6bE5RUzB0Sm5NOVkyOXVjM1Z0WlhKelpXTnlaWFFtZUQwM01nLS06NjdkNWMyYjQwYmVmZDM1NThiMzhlNWY1NGM0NDBkZWY2ODc1YzZhNw=='
+	request["authorization"] = "Basic #{encoded}"
 	request["cache-control"] = 'no-cache'
 	#request["postman-token"] = '99b5c58d-3b87-00e3-46f0-184c59282860'
 	request["content-type"] = 'application/x-www-form-urlencoded'
