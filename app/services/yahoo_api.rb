@@ -79,7 +79,7 @@ class YahooApi
 		encoded = Base64.encode64("#{client_id}:#{secret_id}")
 		Rails.logger.warn "Base64 Code = #{encoded}"
 		{
-			"authorization" => "Basic #{encoded}",
+			"Authorization" => "Basic #{encoded}"
 		}
 	end
 end
