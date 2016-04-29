@@ -58,8 +58,8 @@ class YahooApi
 	request.body = "code=#{code}&client_id=dj0yJmk9ck1TZjRhNWM2b0NmJmQ9WVdrOVZFSTViME5JTkRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD03Mg--&client_secret=67d5c2b40befd3558b38e5f54c440def6875c6a7&redirect_uri=oob&grant_type=authorization_code"
 
 	response = http.request(request)
-	Rails.logger.warn "response type = #{response.type} #{response.class}"
-	puts response.read_body
+	Rails.logger.warn "response type = #{response.class}"
+	#puts response.read_body
 	update_user_token(response)
 	end
 
