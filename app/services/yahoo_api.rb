@@ -55,7 +55,7 @@ class YahooApi
 	request["cache-control"] = 'no-cache'
 	request["postman-token"] = '99b5c58d-3b87-00e3-46f0-184c59282860'
 	request["content-type"] = 'application/x-www-form-urlencoded'
-	request.body = "code=map89wt&client_id=dj0yJmk9ck1TZjRhNWM2b0NmJmQ9WVdrOVZFSTViME5JTkRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD03Mg--&client_secret=67d5c2b40befd3558b38e5f54c440def6875c6a7&redirect_uri=oob&grant_type=authorization_code"
+	request.body = "code=#{code}&client_id=dj0yJmk9ck1TZjRhNWM2b0NmJmQ9WVdrOVZFSTViME5JTkRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD03Mg--&client_secret=67d5c2b40befd3558b38e5f54c440def6875c6a7&redirect_uri=oob&grant_type=authorization_code"
 
 	response = http.request(request)
 	puts response.read_body
