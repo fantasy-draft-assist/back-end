@@ -75,8 +75,7 @@ class YahooApi
 
 	private
 	def update_user_token(response)
-		Rails.logger.warn"RESPONSEABILAIFSJ = #{response.read_body}"
-		@user.update(y_access_token: response.body["access_token"],
+		@user.update(y_access_token: response.read_body["access_token"],
 			y_token_type: response["token_type"],
 			y_refresh_token: response["refresh_token"])
 		if response["expires_in"].present?
