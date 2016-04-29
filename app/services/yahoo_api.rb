@@ -1,7 +1,6 @@
 class YahooApi
 	include HTTParty
 	require 'uri'
-	require 'httplog'
 
 	OAUTH_BASE_URI = URI("https://api.login.yahoo.com/oauth2")
 	REDIR_BASE_URI = URI("https://hockeydoctor.herokuapp.com")
