@@ -43,29 +43,18 @@ class YahooApi
 	  # response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 	  # headers: oauth_headers)
 	  # update_user_token(response)
-
 	  url = URI("#{OAUTH_BASE_URI}/get_token")
-
 	  http = Net::HTTP.new(url.host, url.port)
 	  http.use_ssl = true
 	  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-	  	client_id = ENV["YAHOO_CLIENT_ID"]
-		secret_id = ENV["YAHOO_SECRET_ID"]
-		encoded = Base64.encode64("#{client_id}:#{secret_id}")
-
-	request = Net::HTTP::Post.new(url)
-	#request["authorization"] = 'Basic ZGoweUptazljazFUWmpSaE5XTTJiME5tSm1ROVdWZHJPVlpGU1RWaU1FNUpUa1JKYldOSGJ6bE5RUzB0Sm5NOVkyOXVjM1Z0WlhKelpXTnlaWFFtZUQwM01nLS06NjdkNWMyYjQwYmVmZDM1NThiMzhlNWY1NGM0NDBkZWY2ODc1YzZhNw=='
-	request["authorization"] = "Basic #{encoded}"
-	request["cache-control"] = 'no-cache'
-	#request["postman-token"] = '99b5c58d-3b87-00e3-46f0-184c59282860'
-	request["content-type"] = 'application/x-www-form-urlencoded'
-	request.body = "code=#{code}&client_id=dj0yJmk9ck1TZjRhNWM2b0NmJmQ9WVdrOVZFSTViME5JTkRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD03Mg--&client_secret=67d5c2b40befd3558b38e5f54c440def6875c6a7&redirect_uri=oob&grant_type=authorization_code"
-
-	response = http.request(request)
-	Rails.logger.warn "response type = #{response.class}"
-	#puts response.read_body
-	update_user_token(response)
+	  request = Net::HTTP::Post.new(url)
+	  request["authorization"] = 'Basic ZGoweUptazljazFUWmpSaE5XTTJiME5tSm1ROVdWZHJPVlpGU1RWaU1FNUpUa1JKYldOSGJ6bE5RUzB0Sm5NOVkyOXVjM1Z0WlhKelpXTnlaWFFtZUQwM01nLS06NjdkNWMyYjQwYmVmZDM1NThiMzhlNWY1NGM0NDBkZWY2ODc1YzZhNw=='
+	  request["cache-control"] = 'no-cache'
+	  request["content-type"] = 'application/x-www-form-urlencoded'
+	  request.body = "code=#{code}&client_id=dj0yJmk9ck1TZjRhNWM2b0NmJmQ9WVdrOVZFSTViME5JTkRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD03Mg--&client_secret=67d5c2b40befd3558b38e5f54c440def6875c6a7&redirect_uri=oob&grant_type=authorization_code"
+	  response = http.request(request)
+	  Rails.logger.warn "response type = #{response.class}"
+	  update_user_token(response)
 	end
 
 	def refresh_token!
