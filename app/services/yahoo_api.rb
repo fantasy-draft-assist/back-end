@@ -1,6 +1,7 @@
 class YahooApi
 	include HTTParty
 	require 'uri'
+	require 'httplog'
 
 	OAUTH_BASE_URI = URI("https://api.login.yahoo.com/oauth2")
 	REDIR_BASE_URI = URI("https://hockeydoctor.herokuapp.com")
@@ -31,7 +32,6 @@ class YahooApi
 			redirect_uri: "#{REDIR_BASE_URI}/oauth/#{@user.id}/authorize"
 		}
 		"#{OAUTH_BASE_URI}/request_auth?#{options.to_query}"
-		binding.pry
 	end
 
 	def oauth_get_token(code)
