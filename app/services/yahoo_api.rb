@@ -34,6 +34,7 @@ class YahooApi
 
 	def oauth_get_token(code)
 		params = oauth_params('authorization_code')
+		Rails.logger.warn"code:#{code}   params:#{params}"
 		params.merge!({ "code": code })
 		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 			headers: oauth_headers)
