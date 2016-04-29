@@ -1,6 +1,7 @@
 class YahooApi
 	include HTTParty
 
+
 	OAUTH_BASE_URI = "https://api.login.yahoo.com/oauth2"
 	REDIR_BASE_URI = "https://hockeydoctor.herokuapp.com"
 
@@ -33,12 +34,12 @@ class YahooApi
 	end
 
 	def oauth_get_token(code)
-		params = oauth_params('authorization_code')
-		Rails.logger.warn"code:#{code}   params:#{params}"
-		params.merge!({ "code": code })
-		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
-			headers: oauth_headers)
-		update_user_token(response)
+	  params = oauth_params('authorization_code')
+	  Rails.logger.warn"code:#{code}   params:#{params}"
+	  params.merge!({ "code": code })
+	  response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
+	  headers: oauth_headers)
+	  update_user_token(response)
 	end
 
 	def refresh_token!
@@ -78,6 +79,7 @@ class YahooApi
 		encoded = Base64.encode64("#{client_id}:#{secret_id}")
 		{
 			"Authorization" => "Basic #{encoded}",
+			"content-type" => 'application/x-www-form-urlencoded',
 		}
 	end
 end
