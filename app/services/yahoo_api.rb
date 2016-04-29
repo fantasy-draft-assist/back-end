@@ -69,11 +69,12 @@ class YahooApi
 
 	private
 	def update_user_token(response)
-		@user.update(y_access_token: response.read_body["access_token"],
-			y_token_type: response["token_type"],
-			y_refresh_token: response["refresh_token"])
+		data = JSON.parse(response.body)
+		@user.update(y_access_token: data["access_token"],
+			y_token_type: data["token_type"],
+			y_refresh_token: data["refresh_token"])
 		if response["expires_in"].present?
-			@user.update(y_expires_at: DateTime.now + response["expires_in"].seconds)
+			@user.update(y_expires_at: DateTime.now + data["expires_in"].seconds)
 		else
 			Rails.logger.warn "No Expiration data in response: \n#{response}\n\n"
 		end
