@@ -18,6 +18,6 @@ class PlayerController < ApplicationController
 
 		response = Net::HTTP.start(jagr.hostname, jagr.port) {|http| http.request(request)}
 
-		render json { user: @user.as_json }
+		render json: { user: @user.as_json }
 	end
 end
