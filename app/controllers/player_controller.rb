@@ -13,7 +13,7 @@ class PlayerController < ApplicationController
 		&format=json&diagnostics=true&callback=")
 
 		@user = User.find(params[:user_id])
-		request = Net::HTTP::Get.new(STATS_API)
+		request = Net::HTTP::Get.new(jagr)
 		request["Authorization"] = "#{@user.y_token_type} #{@user.y_access_token}"
 
 		response = Net::HTTP.start(jagr.hostname, jagr.port) {|http| http.request(request)}
