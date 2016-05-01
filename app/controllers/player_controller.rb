@@ -11,11 +11,11 @@ class PlayerController < ApplicationController
 		@user = User.find(params[:user_id])
 		Rails.logger.warn "The token is: #{@user.y_access_token}"
 		request = Net::HTTP::Get.new(jagr)
-		request["Authorization"] = "Bearer #{@user.y_access_token}"
+		request["Authorization"] = "#{@user.y_access_token}"
 
 		Rails.logger.warn "Request: #{request}"
 
-		response = Net::HTTP.get(request)
+		response = Net::HTTP.start(jagr.hostname, jagr.port) {|http| http.request(request)}
 
 		render json: { user: response.as_json }
 	end
