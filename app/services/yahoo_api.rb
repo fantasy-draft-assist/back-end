@@ -70,7 +70,7 @@ class YahooApi
 	private
 	def update_user_token(response)
 		data = JSON.parse(response.body)
-		token = "bearer #{data["access_token"]}"
+		token = "Bearer #{data["access_token"]}"
 		@user.update(y_access_token: token,
 			y_token_type: data["token_type"],
 			y_refresh_token: data["refresh_token"])
