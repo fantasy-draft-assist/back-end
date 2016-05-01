@@ -18,6 +18,8 @@ class PlayerController < ApplicationController
 
 		response = Net::HTTP.start(jagr.hostname, jagr.port) {|http| http.request(request)}
 
+		Rails.logger.warn "Request: #{request}, Response: #{response} Headers?: #{request.header} ,and, #{response.header}"
+
 		render json: { user: response.as_json }
 	end
 end
