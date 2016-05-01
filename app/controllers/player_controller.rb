@@ -16,7 +16,7 @@ class PlayerController < ApplicationController
 		request = Net::HTTP::Get.new(jagr)
 		request["Authorization"] = "#{@user.y_token_type} #{@user.y_access_token}"
 
-		Rails.logger.warn "Request: #{request}, Headers?: #{request.header}"
+		Rails.logger.warn "Request: #{request}, Headers?: #{request.headers}"
 
 		response = Net::HTTP.start(jagr.hostname, jagr.port) {|http| http.request(request)}
 
