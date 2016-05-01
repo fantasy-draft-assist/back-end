@@ -5,11 +5,12 @@ class PlayerController < ApplicationController
 
 
 	def jagr
-		jagr = URI('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%
+
+		jagr = URI("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%
 		20fantasysports.players.stats%20where%
 		20league_key%3D'352.l.641'%20and%
 		20player_key%3D'352.p.35'
-		&format=json&diagnostics=true&callback=')
+		&format=json&diagnostics=true&callback=")
 
 		@user = User.find(params[:user_id])
 		request = Net::HTTP::Get.new(STATS_API)
