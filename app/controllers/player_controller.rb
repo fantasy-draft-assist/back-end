@@ -11,7 +11,7 @@ class PlayerController < ApplicationController
 		@user = User.find(params[:user_id])
 		Rails.logger.warn "The token is: #{@user.y_access_token}"
 
-		http = Net::HTTP.new(jagr.host, jagr.port)
+		http = Net::HTTP.new(url.host, url.port)
 		http.use_ssl = true
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 		request = Net::HTTP::Get.new(url)
