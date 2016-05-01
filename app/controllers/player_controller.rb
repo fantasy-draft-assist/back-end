@@ -16,6 +16,8 @@ class PlayerController < ApplicationController
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 		request = Net::HTTP::Get.new(url)
 		request["Authorization"] = "#{@user.y_access_token}"
+		request["cache-control"] = 'no-cache'
+	  	request["content-type"] = 'application/x-www-form-urlencoded'
 		response = http.request(request)
 
 		Rails.logger.warn "Request: #{request}"
