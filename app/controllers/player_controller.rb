@@ -8,7 +8,7 @@ class PlayerController < ApplicationController
 		@user = User.find(params[:user_id])
 		@api = YahooApi.new(@user)
 		response = @api.get_player_stats(params[:game_key], params[:player_key])
-		render json: { body: response.body }
+		render json: response.body
 	end
 
 	def league
