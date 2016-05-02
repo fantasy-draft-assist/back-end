@@ -10,6 +10,6 @@ class PlayerController < ApplicationController
 
 		response = @api.get_player_stats(params[:player_key])
 
-		render json: { body: @api.response.body }
+		render json: { body: response.body }
 	end
 end
