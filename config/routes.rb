@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get ':user_id/stats/:game_key/:player_key', to: 'player#one'
   get ':user_id/league/:game_key/:league_key', to: 'player#league'
+  get ':user_id/team/:game_key/:league_key/:team_key' to: 'player#team'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
