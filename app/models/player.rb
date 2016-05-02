@@ -9,8 +9,8 @@ class Player < ActiveRecord::Base
 
 	def self.import_from_json(data)
 		ActiveRecord::Base.transaction do
-			player = Player.new(player_name: data["name"],
-				                yahoo_player_id: data["yahoo_id"])
+			player = Player.find_or_create_by(player_name: data["name"],
+				                              yahoo_player_id: data["yahoo_id"])
 			team_data = data["pro_team"]
 			pro_team = ProTeam.find_or_create_by(name: team_data["name"],
 				                                 abbreviation: team_data["abbreviation"],

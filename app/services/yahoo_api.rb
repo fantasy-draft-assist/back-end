@@ -5,6 +5,7 @@ class YahooApi
 	YAHOO_BASE_URI = "https://fantasysports.yahooapis.com/fantasy/v2"
 
 	STATS_MAP = {
+		## TODO
 		0  => "asdlkfjlaskdjf",
 		15 => "shot_percentage",
 		..
@@ -26,6 +27,7 @@ class YahooApi
 
 	def pull_stats(season_id, player_id)
 		data = self.get_player_stats(season_id, player_id)
+		return nil if data.has_key?("error")
 		player_array = data["fantasy_content"]["player"][0]
 		stats_array = data["fantasy_content"]["player"][1]["player_stats"]["stats"]
 		player_data = flatten_hashes(player_array)
@@ -35,8 +37,10 @@ class YahooApi
 		result["name"] = player_data["name"]["full"]
 		result["yahoo_id"] = player_data["player_id"]
 		result["pro_team"] = {}
-		result["pro_team"]["name"] = "something"
-		result["year"] = ""
+		result["pro_team"]["name"] = "" # TODO
+		result["pro_team"]["abbreviation"] = "" # TODO
+		result["pro_team"]["yahoo_id"] = "" # TODO
+		result["year"] = "" # TODO
 		result["stats"] = stats_data
 
 		result

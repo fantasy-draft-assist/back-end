@@ -15,6 +15,7 @@ class YahooImporter
 				@count += 1
 				seasons.each do |season|
 					data = @api.pull_stats(season, @count)
+					next unless data
 					Player.import_from_json(data) #or dump to file??
 					sleep 0.5.seconds
 				end
