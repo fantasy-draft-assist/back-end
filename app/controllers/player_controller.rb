@@ -24,4 +24,11 @@ class PlayerController < ApplicationController
 		response = @api.get_team_players(params[:game_key], params[:league_key], params[:team_key])
 		render json: { body: response.body }
 	end
+
+	def league_info
+		@user = User.find(params[:user)id])
+		@api = YahooApi.new(@user)
+		response = @api.get_league_info(params[:game_key], params[:league_key])
+		render json: { body: response.body }
+	end
 end
