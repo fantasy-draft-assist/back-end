@@ -18,11 +18,8 @@ class YahooApi
 	# kinda like this: 
 	# HTTParty.get("path/for/fantasy/sports/thing", query: whatever, headers: @headers)
 
-	def get_player_stats
-		@user = User.find(params[:user_id])
-		@api = YahooApi.new(@user)
-
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/player/352.p.35/stats?format=json")
+	def get_player_stats(player_key)
+		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/player/#{player_key}/stats?format=json")
 		http = Net::HTTP.new(url.host, url.port)
 		http.use_ssl = true
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -31,8 +28,6 @@ class YahooApi
 		request["cache-control"] = 'no-cache'
 	    request["content-type"] = 'application/x-www-form-urlencoded'
 		response = http.request(request)
-
-		render json: { body: response.body }
 	end
 
 
