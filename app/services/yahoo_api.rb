@@ -4,11 +4,42 @@ class YahooApi
 	REDIR_BASE_URI = "https://hockeydoctor.herokuapp.com"
 	YAHOO_BASE_URI = "https://fantasysports.yahooapis.com/fantasy/v2"
 
+	STATS_MAP = {
+		0  => "asdlkfjlaskdjf",
+		15 => "shot_percentage",
+		..
+		32 => "asldkfjlsakjdf"
+	}
+
 	def initialize(user)
 		@user = user
 		@headers = {
 			"Authorization" => @user.y_access_token
 		}
+	end
+
+	## IMPORTER METHODS
+
+	def token_expires_at
+		@user.y_expires_at
+	end
+
+	def pull_stats(season_id, player_id)
+		data = self.get_player_stats(season_id, player_id)
+		player_array = data["fantasy_content"]["player"][0]
+		stats_array = data["fantasy_content"]["player"][1]["player_stats"]["stats"]
+		player_data = flatten_hashes(player_array)
+		stats_data = hashify_stats(stats_array)
+
+		result = {}
+		result["name"] = player_data["name"]["full"]
+		result["yahoo_id"] = player_data["player_id"]
+		result["pro_team"] = {}
+		result["pro_team"]["name"] = "something"
+		result["year"] = ""
+		result["stats"] = stats_data
+
+		result
 	end
 
 	## FANTASY SPORTS API CALLS
@@ -64,6 +95,27 @@ class YahooApi
 	end
 
 	private
+	def hashify_stats(stats)
+		result = {}
+
+		stats.each do |stat|
+			stat_key = stat["stat"]["stat_id"]
+			result_key = STATS_MAP[stat_key]
+			value = stat["stat"]["value"]
+			result[result_key] = value
+		end
+
+		result
+	end
+
+	def flatten_hashes(hashes)
+		result = {}
+		hashes.each do |hash|
+			result.merge!(hash)
+		end
+		result
+	end
+
 	def update_user_token(response)
 		data = JSON.parse(response.body)
 		token = "Bearer #{data["access_token"]}"
