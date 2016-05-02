@@ -7,7 +7,7 @@ class PlayerController < ApplicationController
 	def jagr
 		@user = User.find(params[:user_id])
 
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/players;player_keys=352.p.35&format=json&diagnostics=true&callback=")
+		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/players;player_keys=352.p.35?format=json")
 		http = Net::HTTP.new(url.host, url.port)
 		http.use_ssl = true
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
