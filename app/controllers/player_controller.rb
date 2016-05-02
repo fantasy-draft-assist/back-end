@@ -6,7 +6,7 @@ class PlayerController < ApplicationController
 
 	def jagr
 
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2?q=select%20*%20from%20fantasysports.players.stats%20where%20league_key%3D'352.l.641'%20and%20player_key%3D'352.p.35'&format=json&diagnostics=true&callback=")
+		url = URI("http://fantasysports.yahooapis.com/fantasy/v2/players;player_keys=352.p.35&format=json&diagnostics=true&callback=")
 
 		@user = User.find(params[:user_id])
 
