@@ -4,20 +4,12 @@ require 'net/http'
 class PlayerController < ApplicationController
 
 
-	def jagr
+	def one(player_key)
 		@user = User.find(params[:user_id])
+		@api = YahooApi.new(@user)
 
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/player/352.p.35/stats?format=json")
-		# url = URI("https://fantasysports.yahooapis.com/fantasy/v2/players;player_keys=352.p.35?format=json")
-		http = Net::HTTP.new(url.host, url.port)
-		http.use_ssl = true
-		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-		request = Net::HTTP::Get.new(url)
-		request["Authorization"] = "#{@user.y_access_token}"
-		request["cache-control"] = 'no-cache'
-	    request["content-type"] = 'application/x-www-form-urlencoded'
-		response = http.request(request)
+		response = @api.get_player_stats(params[:player_key])
 
-		render json: { headers: response, body: response.body }
+		render json: { body: @api.response.body }
 	end
 end

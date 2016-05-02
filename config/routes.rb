@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'oauth/:user_id', to: 'oauth#new', as: 'oauth' # oauth_url oauth_path
   get 'oauth/:user_id/authorize', to: 'oauth#create', as: 'authorize'
 
-  get ':user_id/test', to: 'player#jagr'
+  get ':user_id/test/:player_key', to: 'player#one'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
