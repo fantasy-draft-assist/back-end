@@ -1,70 +1,38 @@
-require 'uri'
-require 'net/http'
-
 class YahooApi
 
 	OAUTH_BASE_URI = "https://api.login.yahoo.com/oauth2"
 	REDIR_BASE_URI = "https://hockeydoctor.herokuapp.com"
+	YAHOO_BASE_URI = "https://fantasysports.yahooapis.com/fantasy/v2"
 
 	def initialize(user)
 		@user = user
 		@headers = {
-			"Authorization: Bearer" => @user.y_access_token
+			"Authorization" => @user.y_access_token
 		}
 	end
 
 	## FANTASY SPORTS API CALLS
 
-	# kinda like this: 
-	# HTTParty.get("path/for/fantasy/sports/thing", query: whatever, headers: @headers)
-
 	def get_player_stats(game_key, player_key)
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/player/#{game_key}.p.#{player_key}/stats?format=json")
-		http = Net::HTTP.new(url.host, url.port)
-		http.use_ssl = true
-		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-		request = Net::HTTP::Get.new(url)
-		request["Authorization"] = "#{@user.y_access_token}"
-		request["cache-control"] = 'no-cache'
-	    request["content-type"] = 'application/x-www-form-urlencoded'
-		response = http.request(request)
+		response = HTTParty.get("#{YAHOO_BASE_URI}/player/#{game_key}.p.#{player_key}/stats",
+			query: { format: "json" }, headers: @headers)
 	end
 
 	def get_league_players(game_key, league_key)
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/league/#{game_key}.l.#{league_key}/players")
-		http = Net::HTTP.new(url.host, url.port)
-		http.use_ssl = true
-		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-		request = Net::HTTP::Get.new(url)
-		request["Authorization"] = "#{@user.y_access_token}"
-		request["cache-control"] = 'no-cache'
-	    request["content-type"] = 'application/x-www-form-urlencoded'
-		response = http.request(request)
+		response = HTTParty.get("#{YAHOO_BASE_URI}/league/#{game_key}.l.#{league_key}/players",
+			query: { format: "json" }, headers: @headers)
 	end
 
 	def get_team_players(game_key, league_key, team_key)
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/team/#{game_key}.l.#{league_key}.t.#{team_key}/roster/players")
-		http = Net::HTTP.new(url.host, url.port)
-		http.use_ssl = true
-		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-		request = Net::HTTP::Get.new(url)
-		request["Authorization"] = "#{@user.y_access_token}"
-		request["cache-control"] = 'no-cache'
-	    request["content-type"] = 'application/x-www-form-urlencoded'
-		response = http.request(request)
+		response = HTTParty.get("#{YAHOO_BASE_URI}/team/#{game_key}.l.#{league_key}.t.#{team_key}/roster/players",
+			query: { format: "json" }, headers: @headers)
 	end
 
 	def get_transactions(game_key, league_key)
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/league/#{game_key}.l.#{league_key}/transactions")
-		http = Net::HTTP.new(url.host, url.port)
-		http.use_ssl = true
-		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-		request = Net::HTTP::Get.new(url)
-		request["Authorization"] = "#{@user.y_access_token}"
-		request["cache-control"] = 'no-cache'
-	    request["content-type"] = 'application/x-www-form-urlencoded'
-		response = http.request(request)
+		response = HTTParty.get("#{YAHOO_BASE_URI}/league/#{game_key}.l.#{league_key}/transactions",
+			query: { format: "json" }, headers: @headers)
 	end
+
 	## OAUTH API CALLS
 
 	def oauth_request_url
@@ -77,17 +45,12 @@ class YahooApi
 	end
 
 	def oauth_get_token(code)
-	  url = URI("#{OAUTH_BASE_URI}/get_token")
-	  http = Net::HTTP.new(url.host, url.port)
-	  http.use_ssl = true
-	  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-	  request = Net::HTTP::Post.new(url)
-	  request["authorization"] = 'Basic ZGoweUptazljazFUWmpSaE5XTTJiME5tSm1ROVdWZHJPVlpGU1RWaU1FNUpUa1JKYldOSGJ6bE5RUzB0Sm5NOVkyOXVjM1Z0WlhKelpXTnlaWFFtZUQwM01nLS06NjdkNWMyYjQwYmVmZDM1NThiMzhlNWY1NGM0NDBkZWY2ODc1YzZhNw=='
-	  request["cache-control"] = 'no-cache'
-	  request["content-type"] = 'application/x-www-form-urlencoded'
-	  request.body = "code=#{code}&client_id=dj0yJmk9ck1TZjRhNWM2b0NmJmQ9WVdrOVZFSTViME5JTkRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD03Mg--&client_secret=67d5c2b40befd3558b38e5f54c440def6875c6a7&redirect_uri=oob&grant_type=authorization_code"
-	  response = http.request(request)
-	  update_user_token(response)
+		params = oauth_params("authorization_code")
+		Rails.logger.warn"code:#{code}   params:#{params}"
+		params.merge!({ "code": code })
+		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
+	  		headers: oauth_headers)
+		update_user_token(response)
 	end
 
 	def refresh_token!
@@ -123,9 +86,12 @@ class YahooApi
 		}
 	end
 
-	def auth64_header
+	def oauth_headers
 		client_id = ENV["YAHOO_CLIENT_ID"]
 		secret_id = ENV["YAHOO_SECRET_ID"]
-		Base64.encode64("#{client_id}:#{secret_id}")
+		encoded = Base64.encode64("#{client_id}:#{secret_id}").gsub("\n", '')
+		{
+			"Authorization" => "Basic #{encoded}"
+		}
 	end
 end

@@ -1,6 +1,3 @@
-require 'uri'
-require 'net/http'
-
 class PlayerController < ApplicationController
 
 
