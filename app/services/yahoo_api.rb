@@ -48,7 +48,7 @@ class YahooApi
 	  http.use_ssl = true
 	  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 	  request = Net::HTTP::Post.new(url)
-	  request["authorization"] = "Basic #{auth64_header}"
+	  request["authorization"] = 'Basic ZGoweUptazljazFUWmpSaE5XTTJiME5tSm1ROVdWZHJPVlpGU1RWaU1FNUpUa1JKYldOSGJ6bE5RUzB0Sm5NOVkyOXVjM1Z0WlhKelpXTnlaWFFtZUQwM01nLS06NjdkNWMyYjQwYmVmZDM1NThiMzhlNWY1NGM0NDBkZWY2ODc1YzZhNw=='
 	  request["cache-control"] = 'no-cache'
 	  request["content-type"] = 'application/x-www-form-urlencoded'
 	  request.body = "code=#{code}&client_id=dj0yJmk9ck1TZjRhNWM2b0NmJmQ9WVdrOVZFSTViME5JTkRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD03Mg--&client_secret=67d5c2b40befd3558b38e5f54c440def6875c6a7&redirect_uri=oob&grant_type=authorization_code"
