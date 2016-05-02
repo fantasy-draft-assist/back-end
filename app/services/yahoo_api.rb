@@ -2,8 +2,6 @@ require 'uri'
 require 'net/http'
 
 class YahooApi
-	include HTTParty
-
 
 	OAUTH_BASE_URI = "https://api.login.yahoo.com/oauth2"
 	REDIR_BASE_URI = "https://hockeydoctor.herokuapp.com"
@@ -37,23 +35,15 @@ class YahooApi
 	end
 
 	def oauth_get_token(code)
-	  # params = oauth_params("authorization_code")
-	  # Rails.logger.warn"code:#{code}   params:#{params}"
-	  # params.merge!({ "code": code })
-	  # response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
-	  # headers: oauth_headers)
-	  # update_user_token(response)
 	  url = URI("#{OAUTH_BASE_URI}/get_token")
 	  http = Net::HTTP.new(url.host, url.port)
 	  http.use_ssl = true
 	  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 	  request = Net::HTTP::Post.new(url)
-	  request["authorization"] = 'Basic ZGoweUptazljazFUWmpSaE5XTTJiME5tSm1ROVdWZHJPVlpGU1RWaU1FNUpUa1JKYldOSGJ6bE5RUzB0Sm5NOVkyOXVjM1Z0WlhKelpXTnlaWFFtZUQwM01nLS06NjdkNWMyYjQwYmVmZDM1NThiMzhlNWY1NGM0NDBkZWY2ODc1YzZhNw=='
-	  request["cache-control"] = 'no-cache'
+	  request["authorization"] = "Basic #{auth64_header}"
 	  request["content-type"] = 'application/x-www-form-urlencoded'
 	  request.body = "code=#{code}&client_id=dj0yJmk9ck1TZjRhNWM2b0NmJmQ9WVdrOVZFSTViME5JTkRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD03Mg--&client_secret=67d5c2b40befd3558b38e5f54c440def6875c6a7&redirect_uri=oob&grant_type=authorization_code"
 	  response = http.request(request)
-	  Rails.logger.warn "response type = #{response.class}"
 	  update_user_token(response)
 	end
 
@@ -90,13 +80,9 @@ class YahooApi
 		}
 	end
 
-	def oauth_headers
+	def auth64_header
 		client_id = ENV["YAHOO_CLIENT_ID"]
 		secret_id = ENV["YAHOO_SECRET_ID"]
-		encoded = Base64.encode64("#{client_id}:#{secret_id}")
-		Rails.logger.warn "Base64 Code = #{encoded}"
-		{
-			"Authorization" => "Basic #{encoded}"
-		}
+		Base64.encode64("#{client_id}:#{secret_id}")
 	end
 end

@@ -3,7 +3,7 @@ class OauthController < ApplicationController
 	def new
 		@user = User.find(params[:user_id])
 		@api = YahooApi.new(@user)
-		Rails.logger.warn"request url:#{@api.oauth_request_url}"
+		Rails.logger.warn "request url:#{@api.oauth_request_url}"
 		redirect_to @api.oauth_request_url
 	end
 
