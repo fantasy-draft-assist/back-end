@@ -30,6 +30,18 @@ class YahooApi
 		response = http.request(request)
 	end
 
+	def get_league_players(game_key, league_key)
+		url = URI("http://fantasysports.yahooapis.com/fantasy/v2/league/#{game_key}.l.#{league_key}/players")
+		http = Net::HTTP.new(url.host, url.port)
+		http.use_ssl = true
+		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+		request = Net::HTTP::Get.new(url)
+		request["Authorization"] = "#{@user.y_access_token}"
+		request["cache-control"] = 'no-cache'
+	    request["content-type"] = 'application/x-www-form-urlencoded'
+		response = http.request(request)
+	end
+
 
 	## OAUTH API CALLS
 
