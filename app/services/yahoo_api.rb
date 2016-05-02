@@ -54,8 +54,8 @@ class YahooApi
 		response = http.request(request)
 	end
 
-	def get_league_info(game_key, league_key)
-		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/leagues;league_keys=#{game_key}.l.#{league_key}")
+	def get_transactions(game_key, league_key)
+		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/league/#{game_key}.l.#{league_key}/transactions")
 		http = Net::HTTP.new(url.host, url.port)
 		http.use_ssl = true
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
