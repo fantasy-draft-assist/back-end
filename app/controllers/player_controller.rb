@@ -22,6 +22,6 @@ class PlayerController < ApplicationController
 
 		Rails.logger.warn "Request: #{request}"
 
-		render json: { headers: response.to_json, body: response.body.to_json }
+		render json: { headers: response, body: response.body }
 	end
 end
