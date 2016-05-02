@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'oauth/:user_id/authorize', to: 'oauth#create', as: 'authorize'
 
   get ':user_id/stats/:game_key/:player_key', to: 'player#one'
-  get ':user_id/league/:league_key/:player_key', to: 'player#league'
+  get ':user_id/league/:game_key/:league_key', to: 'player#league'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
