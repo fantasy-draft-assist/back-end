@@ -18,7 +18,7 @@ class YahooApi
 	# kinda like this: 
 	# HTTParty.get("path/for/fantasy/sports/thing", query: whatever, headers: @headers)
 
-	def get_player_stats(game_key, letter, player_key)
+	def get_player_stats(game_key, player_key)
 		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/player/#{game_key}.p.#{player_key}/stats?format=json")
 		http = Net::HTTP.new(url.host, url.port)
 		http.use_ssl = true
