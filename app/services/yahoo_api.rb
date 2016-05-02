@@ -31,7 +31,7 @@ class YahooApi
 	end
 
 	def get_league_players(game_key, league_key)
-		url = URI("http://fantasysports.yahooapis.com/fantasy/v2/league/#{game_key}.l.#{league_key}/players")
+		url = URI("https://fantasysports.yahooapis.com/fantasy/v2/league/#{game_key}.l.#{league_key}/players")
 		http = Net::HTTP.new(url.host, url.port)
 		http.use_ssl = true
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
