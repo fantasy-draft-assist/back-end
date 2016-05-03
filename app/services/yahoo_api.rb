@@ -64,7 +64,9 @@ class YahooApi
 		result["pro_team"] = {}
 		result["pro_team"]["name"] = player_data["editorial_team_full_name"] 
 		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] 
-		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"]
+		split_team = player_data["editorial_team_key"].split(".")
+		team_number = split_team.last
+		result["pro_team"]["yahoo_team_id"] = team_number
 		result["pro_player"] = {}
 		result["pro_player"]["season"] = data["fantasy_content"]["player"][1]["player_stats"]["0"]["season"] # TODO
 		result["player_stats"] = stats_data
