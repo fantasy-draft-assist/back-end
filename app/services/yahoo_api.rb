@@ -69,6 +69,7 @@ class YahooApi
 		# 	"player_stats" => stats_data
 		# 	}
 
+		result = { }
 		result["player_name"] = player_data["name"]["full"]
 		result["yahoo_player_id"] = player_data["player_id"]
 		result["uniform_number"] = player_data["uniform_number"]
@@ -144,7 +145,7 @@ class YahooApi
 		result = {}
 
 		stats.each do |stat|
-			stat_key = stat["stat"]["stat_id"]
+			stat_key = stat["stat"]["stat_id"].to_i
 			result_key = STATS_MAP[stat_key]
 			value = stat["stat"]["value"]
 			result[result_key] = value
