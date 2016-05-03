@@ -21,7 +21,7 @@ class YahooApi
 		14 => "shots_on_goal",
 		15 => "shot_percentage",
 		16 => "faceoffs_won",
-		17 => "facoffs_lost",
+		17 => "faceoffs_lost",
 		18 => "games_started",
 		19 => "wins",
 		20 => "losses",
