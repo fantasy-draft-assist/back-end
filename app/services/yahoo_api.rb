@@ -60,11 +60,14 @@ class YahooApi
 		result = {}
 		result["player_name"] = player_data["name"]["full"]
 		result["yahoo_player_id"] = player_data["player_id"]
+		result["uniform_number"] = player_data["uniform_number"]
+		result["headshot_url"] = player_data["headshot"]["url"]
+		result["positions"] = player_data["eligible_positions"]["position"]
 		result["pro_team"] = {}
-		result["pro_team"]["name"] = "" # TODO
-		result["pro_team"]["abbreviation"] = "" # TODO
-		result["pro_team"]["yahoo_team_id"] = "" # TODO
-		result["year"] = "" # TODO
+		result["pro_team"]["name"] = player_data["editorial_team_full_name"] # TODO
+		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] # TODO
+		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"] # TODO
+		result["pro_player"]["season"] = stats_data[0]["season"] # TODO
 		result["player_stats"] = stats_data
 
 		result
@@ -75,6 +78,7 @@ class YahooApi
 	def get_player_stats(game_key, player_key)
 		response = HTTParty.get("#{YAHOO_BASE_URI}/player/#{game_key}.p.#{player_key}/stats",
 			query: { format: "json" }, headers: @headers)
+		Rails.logger.warn "pulling player #{game_key}, #{player_key}"
 	end
 
 	def get_league_players(game_key, league_key)
@@ -134,6 +138,7 @@ class YahooApi
 		end
 
 		result
+		Rails.logger.warn"The hasified stats are #{result}"
 	end
 
 	def flatten_hashes(hashes)
@@ -142,6 +147,7 @@ class YahooApi
 			result.merge!(hash)
 		end
 		result
+		Rails.logger.info"The flattened hash is #{result}"
 	end
 
 	def update_user_token(response)
