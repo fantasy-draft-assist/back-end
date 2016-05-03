@@ -60,7 +60,7 @@ class YahooApi
 		result["yahoo_player_id"] = player_data["player_id"]
 		result["uniform_number"] = player_data["uniform_number"]
 		result["headshot_url"] = player_data["headshot"]["url"]
-		result["positions"] = player_data["eligible_positions"][0]["position"]
+		result["positions"] = player_data["eligible_positions"].map {|x| x["position"]}
 		result["pro_team"] = {}
 		result["pro_team"]["name"] = player_data["editorial_team_full_name"] 
 		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] 
