@@ -18,11 +18,11 @@ class Player < ActiveRecord::Base
 			team_data = data["pro_team"]
 			pro_team = ProTeam.find_or_create_by(name: team_data["name"],
 				                                 abbreviation: team_data["abbreviation"],
-				                                 yahoo_team_id: team_data["yahoo_id"])
+				                                 yahoo_team_id: team_data["yahoo_team_id"])
 			pro_player = player.pro_players.new(player_id: player.id,
 												pro_team_id: pro_team.id,
 				                                season: data["pro_player"]["season"])
-			stats = player.player_stats.new(data["stats"])
+			stats = player.pro_players.player_stats.new(data["stats"])
 			player.save
 		end
 	end
