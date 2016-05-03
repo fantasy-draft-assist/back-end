@@ -9,6 +9,7 @@ class YahooImporter
 		while @count < max_player_id
 			if @api.token_expires_at <= DateTime.now + 2.minutes
 				@api.refresh_token!
+				Rails.logger.info "New Token?! Token now expires at #{@api.token_expires_at}"
 			elsif (@count % 2500).zero?
 				sleep 10.minutes
 			else

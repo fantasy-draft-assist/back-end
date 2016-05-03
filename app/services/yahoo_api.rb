@@ -5,11 +5,35 @@ class YahooApi
 	YAHOO_BASE_URI = "https://fantasysports.yahooapis.com/fantasy/v2"
 
 	STATS_MAP = {
-		## TODO
-		0  => "asdlkfjlaskdjf",
+		0  => "games_played",
+		1  => "goals",
+		2  => "assists",
+		3  => "points",
+		4  => "plus_minus",
+		5  => "penalty_minutes",
+		6  => "powerplay_goals",
+		7  => "powerplay_assists",
+		8  => "powerplay_points",
+		9  => "shorthanded_goals",
+		10 => "shorthanded_assists",
+		11 => "shorthanded_points",
+		12 => "game_winning_goals",
+		14 => "shots_on_goal",
 		15 => "shot_percentage",
-		..
-		32 => "asldkfjlsakjdf"
+		16 => "faceoffs_won",
+		17 => "facoffs_lost",
+		18 => "games_started",
+		19 => "wins",
+		20 => "losses",
+		22 => "goals_against",
+		23 => "goals_against_average",
+		24 => "shots_against",
+		25 => "saves",
+		26 => "save_percentage",
+		27 => "shutouts",
+		28 => "minutes_played",
+		31 => "hits",
+		32 => "blocks"
 	}
 
 	def initialize(user)
@@ -34,14 +58,14 @@ class YahooApi
 		stats_data = hashify_stats(stats_array)
 
 		result = {}
-		result["name"] = player_data["name"]["full"]
-		result["yahoo_id"] = player_data["player_id"]
+		result["player_name"] = player_data["name"]["full"]
+		result["yahoo_player_id"] = player_data["player_id"]
 		result["pro_team"] = {}
 		result["pro_team"]["name"] = "" # TODO
 		result["pro_team"]["abbreviation"] = "" # TODO
-		result["pro_team"]["yahoo_id"] = "" # TODO
+		result["pro_team"]["yahoo_team_id"] = "" # TODO
 		result["year"] = "" # TODO
-		result["stats"] = stats_data
+		result["player_stats"] = stats_data
 
 		result
 	end
