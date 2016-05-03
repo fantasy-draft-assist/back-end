@@ -38,9 +38,6 @@ class YahooApi
 
 	def initialize(user)
 		@user = user
-		@headers = {
-			"Authorization" => @user.y_access_token
-		}
 	end
 
 	## IMPORTER METHODS
@@ -92,22 +89,22 @@ class YahooApi
 	def get_player_stats(game_key, player_key)
 		Rails.logger.warn "pulling player #{game_key}, #{player_key}"
 		response = HTTParty.get("#{YAHOO_BASE_URI}/player/#{game_key}.p.#{player_key}/stats",
-			query: { format: "json" }, headers: @headers)
+			query: { format: "json" }, headers: request_headers)
 	end
 
 	def get_league_players(game_key, league_key)
 		response = HTTParty.get("#{YAHOO_BASE_URI}/league/#{game_key}.l.#{league_key}/players",
-			query: { format: "json" }, headers: @headers)
+			query: { format: "json" }, headers: request_headers)
 	end
 
 	def get_team_players(game_key, league_key, team_key)
 		response = HTTParty.get("#{YAHOO_BASE_URI}/team/#{game_key}.l.#{league_key}.t.#{team_key}/roster/players",
-			query: { format: "json" }, headers: @headers)
+			query: { format: "json" }, headers: request_headers)
 	end
 
 	def get_transactions(game_key, league_key)
 		response = HTTParty.get("#{YAHOO_BASE_URI}/league/#{game_key}.l.#{league_key}/transactions",
-			query: { format: "json" }, headers: @headers)
+			query: { format: "json" }, headers: request_headers)
 	end
 
 	## OAUTH API CALLS
@@ -168,13 +165,19 @@ class YahooApi
 		data = JSON.parse(response.body)
 		token = "Bearer #{data["access_token"]}"
 		@user.update(y_access_token: token,
-			y_token_type: data["token_type"],
-			y_refresh_token: data["refresh_token"])
+					 y_token_type: data["token_type"],
+					 y_refresh_token: data["refresh_token"])
 		if data["expires_in"].present?
 			@user.update(y_expires_at: DateTime.now + data["expires_in"].seconds)
 		else
 			Rails.logger.warn "No Expiration data in response: \n#{response}\n\n"
 		end
+	end
+
+	def request_headers
+		{
+			"Authorization" => @user.y_access_token
+		}
 	end
 
 	def oauth_params(grant_type)
