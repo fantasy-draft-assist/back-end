@@ -72,8 +72,7 @@ class YahooApi
 		result["player_stats"] = stats_data
 
 		Rails.logger.info "The resulting mess is #{result} \n\n stats data: #{stats_data}"
-		R
-
+		
 		result
 	end
 
