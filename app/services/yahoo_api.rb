@@ -79,6 +79,8 @@ class YahooApi
 		response = HTTParty.get("#{YAHOO_BASE_URI}/player/#{game_key}.p.#{player_key}/stats",
 			query: { format: "json" }, headers: @headers)
 		Rails.logger.warn "pulling player #{game_key}, #{player_key}"
+
+		response
 	end
 
 	def get_league_players(game_key, league_key)
