@@ -9,9 +9,10 @@ class Player < ActiveRecord::Base
 
 	def self.import_from_json(data)
 		ActiveRecord::Base.transaction do
+			Rails.logger.info " positions data is #{data["positions"]} ???"
 			player = Player.find_or_create_by(first_name: data["first_name"],
 											  last_name: data["last_name"],
-				                              yahoo_player_id: data["yahoo_id"],
+				                              yahoo_player_id: data["yahoo_player_id"],
 				                              headshot_url: data["headshot_url"],
 				                              uniform_number: data["uniform_number"],
 				                              positions: data["positions"])
