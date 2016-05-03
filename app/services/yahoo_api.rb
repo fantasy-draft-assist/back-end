@@ -51,7 +51,6 @@ class YahooApi
 		return nil if data.has_key?("error")
 		player_array = data["fantasy_content"]["player"][0]
 		stats_array = data["fantasy_content"]["player"][1]["player_stats"]["stats"]
-		season = data["fantasy_content"]["player"][1]["player_stats"][0]["season"]
 		player_data = flatten_hashes(player_array)
 		stats_data = hashify_stats(stats_array)
 
@@ -67,7 +66,7 @@ class YahooApi
 		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] # TODO
 		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"] # TODO
 		result["pro_player"] = {}
-		result["pro_player"]["season"] = stats_data[0]["season"] # TODO
+		result["pro_player"]["season"] = data["fantasy_content"]["player"][1]["player_stats"][0]["season"] # TODO
 		result["player_stats"] = stats_data
 
 		Rails.logger.info "The resulting mess is #{result}"
