@@ -66,6 +66,7 @@ class YahooApi
 		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] # TODO
 		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"] # TODO
 		result["pro_player"] = {}
+		result["pro_player"]["season"] = {}
 		result["pro_player"]["season"] = stats_data[0]["season"] # TODO
 		result["player_stats"] = stats_data
 
