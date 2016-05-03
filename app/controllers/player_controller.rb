@@ -1,5 +1,12 @@
 class PlayerController < ApplicationController
 
+	def scraper
+		@user = User.find(params[:user_id])
+		@api = YahooApi.new(@user)
+		@importer = YahooImporter.new(@api)
+		@importer.scrape_stats([303,321,341,352], 7060)
+	end
+
 
 	def one
 		@user = User.find(params[:user_id])
