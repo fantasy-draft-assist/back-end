@@ -151,7 +151,7 @@ class YahooApi
 		end
 
 		result
-		Rails.logger.warn"The hasified stats are #{result}"
+		Rails.logger.warn"The hashified stats are #{result}"
 	end
 
 	def flatten_hashes(hashes)
