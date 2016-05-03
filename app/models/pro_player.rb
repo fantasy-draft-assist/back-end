@@ -2,5 +2,5 @@ class ProPlayer < ActiveRecord::Base
 	belongs_to :pro_team
 	belongs_to :player
 
-	has_one :player_stats
+	has_one :player_stat
 end
