@@ -54,6 +54,7 @@ class YahooApi
 		return nil if data.has_key?("error")
 		player_array = data["fantasy_content"]["player"][0]
 		stats_array = data["fantasy_content"]["player"][1]["player_stats"]["stats"]
+		Rails.logger.info "The stats_array is #{stats_array}"
 		player_data = flatten_hashes(player_array)
 		stats_data = hashify_stats(stats_array)
 
