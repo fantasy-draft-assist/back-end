@@ -144,7 +144,7 @@ class YahooApi
 	def flatten_hashes(hashes)
 		result = {}
 		hashes.each do |hash|
-			result.merge!(hash)
+			result["#{hash}"] = hash
 		end
 		result
 		Rails.logger.info"The flattened hash is #{result}"
