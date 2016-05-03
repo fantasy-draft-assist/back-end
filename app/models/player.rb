@@ -22,6 +22,7 @@ class Player < ActiveRecord::Base
 			pro_player = player.pro_players.create(player_id: player.id,
 												   pro_team_id: pro_team.id,
 				                                   season: data["pro_player"]["season"])
+			Rails.logger.info "this is::::: #{pro_player.player_stat.class} :::: "
 			stats = pro_player.player_stat.create(data["stats"])
 		end
 	end
