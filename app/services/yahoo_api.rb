@@ -148,8 +148,8 @@ class YahooApi
 		hashes.each do |hash|
 			result.merge!(hash) if hash.is_a?(Hash)
 		end
-		result
 		Rails.logger.info "The flattened hash is #{result}"
+		result
 	end
 
 	def update_user_token(response)
