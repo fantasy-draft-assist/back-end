@@ -8,8 +8,9 @@ class YahooImporter
 	def scrape_stats(seasons, max_player_id)
 		while @count < max_player_id
 			if @api.token_expires_at <= DateTime.now + 2.minutes
+				Rails.logger.info "Token is about to expire: #{@api.token_expires_at}"
 				@api.refresh_token!
-				Rails.logger.info "New Token?! Token now expires at #{@api.token_expires_at}"
+				Rails.logger.info "Token has been refreshed: #{@api.token_expires_at}"
 			elsif (@count % 2500).zero? && @count != 0
 				sleep 10.minutes
 			else
