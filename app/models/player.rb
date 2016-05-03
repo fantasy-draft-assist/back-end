@@ -22,8 +22,22 @@ class Player < ActiveRecord::Base
 			pro_player = player.pro_players.create(player_id: player.id,
 												   pro_team_id: pro_team.id,
 				                                   season: data["pro_player"]["season"])
-			pro_player.player_stat = PlayerStat.create(data["stats"])
-			fight
+			pro_player.player_stat = PlayerStat.create(games_played: data["stats"]["games_played"],
+				goals: data["stats"]["goals"], assists: data["stats"]["assists"],
+				points: data["stats"]["points"], plus_minus: data["stats"]["plus_minus"],
+				penalty_minutes: data["stats"]["penalty_minutes"], powerplay_goals: data["stats"]["powerplay_goals"],
+				powerplay_assists: data["stats"]["powerplay_assists"], powerplay_points: data["stats"]["powerplay_points"],
+				shorthanded_goals: data["stats"]["shorthanded_goals"], shorthanded_assists: data["stats"]["shorthanded_assists"],
+				shorthanded_points: data["stats"]["shorthanded_points"], game_winning_goals: data["stats"]["game_winning_goals"],
+				shots_on_goal: data["stats"]["shots_on_goal"], shot_percentage:	data["stats"]["shot_percentage"],
+				faceoffs_won: data["stats"]["faceoffs_won"], faceoffs_lost: data["stats"]["faceoffs_lost"],
+				games_started: data["stats"]["games_started"], wins: data["stats"]["wins"],
+				losses: data["stats"]["losses"], goals_against: data["stats"]["goals_against"],
+				goals_against_average: data["stats"]["goals_against_average"], shots_against: data["stats"]["shots_against"],
+				saves: data["stats"]["saves"], save_percentage: data["stats"]["save_percentage"],
+				shutouts: data["stats"]["shutouts"], minutes_played: data["stats"]["minutes_played"],
+				hits: data["stats"]["hits"], blocks: data["stats"]["blocks"]
+									)
 		end
 	end
 end
