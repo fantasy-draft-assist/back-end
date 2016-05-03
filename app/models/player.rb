@@ -22,7 +22,7 @@ class Player < ActiveRecord::Base
 			pro_player = player.pro_players.create(player_id: player.id,
 												   pro_team_id: pro_team.id,
 				                                   season: data["pro_player"]["season"])
-			stats = pro_player.player_stats.create(data["stats"])
+			stats = pro_player.player_stat.create(data["stats"])
 		end
 	end
 end
