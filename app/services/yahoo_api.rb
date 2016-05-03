@@ -54,9 +54,8 @@ class YahooApi
 		player_data = flatten_hashes(player_array)
 		stats_data = hashify_stats(stats_array)
 
-		Rails.logger.info "Player_data is #{player_data}\n\nStats_data is #{stats_data}\n\nResult is #{result}\n\n"
-
 		result = {}
+		Rails.logger.info "Player_data is #{player_data}\n\nStats_data is #{stats_data}\n\nResult is #{result}\n\n"
 		result["player_name"] = player_data["name"]["full"]
 		result["yahoo_player_id"] = player_data["player_id"]
 		result["uniform_number"] = player_data["uniform_number"]
