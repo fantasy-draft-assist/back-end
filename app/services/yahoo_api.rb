@@ -73,7 +73,7 @@ class YahooApi
 		result
 	end
 
-	## FANTASY SPORTS API CALLS
+	## FANTASY SPORTS API CALLS !
 
 	def get_player_stats(game_key, player_key)
 		response = HTTParty.get("#{YAHOO_BASE_URI}/player/#{game_key}.p.#{player_key}/stats",
