@@ -55,7 +55,6 @@ class YahooApi
 		stats_data = hashify_stats(stats_array)
 
 		result = {}
-		Rails.logger.info "Player_data is #{player_data}\n\nStats_data is #{stats_data}\n\nResult is #{result}\n\n"
 		result["player_name"] = player_data["name"]["full"]
 		result["yahoo_player_id"] = player_data["player_id"]
 		result["uniform_number"] = player_data["uniform_number"]
@@ -67,7 +66,6 @@ class YahooApi
 		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"]
 		result["pro_player"] = {}
 		result["pro_player"]["season"] = {}
-		Rails.logger.info "Pro Player is #{result["pro_player"]}\n\nSeason is #{result["pro_player"]["season"]}\n\nData is #{data["fantasy_content"]["player"][1]["player_stats"]["0"]["season"]}"
 		result["pro_player"]["season"] = data["fantasy_content"]["player"][1]["player_stats"]["0"]["season"] # TODO
 		result["player_stats"] = stats_data
 
@@ -79,7 +77,7 @@ class YahooApi
 	## FANTASY SPORTS API CALLS !
 
 	def get_player_stats(game_key, player_key)
-		Rails.logger.warn "pulling player #{game_key}, #{player_key}"
+		Rails.logger.info "pulling player #{game_key}, #{player_key}"
 		response = HTTParty.get("#{YAHOO_BASE_URI}/player/#{game_key}.p.#{player_key}/stats",
 			query: { format: "json" }, headers: request_headers)
 	end
@@ -112,7 +110,6 @@ class YahooApi
 
 	def oauth_get_token(code)
 		params = oauth_params("authorization_code")
-		Rails.logger.warn"code:#{code}   params:#{params}"
 		params.merge!({ "code": code })
 		response = HTTParty.post("#{OAUTH_BASE_URI}/get_token", body: params,
 	  		headers: oauth_headers)
@@ -146,12 +143,10 @@ class YahooApi
 	end
 
 	def flatten_hashes(hashes)
-		Rails.logger.info "The unflattened hash is #{hashes}"
 		result = {}
 		hashes.each do |hash|
 			result.merge!(hash) if hash.is_a?(Hash)
 		end
-		Rails.logger.info "The flattened hash is #{result}"
 		result
 	end
 
