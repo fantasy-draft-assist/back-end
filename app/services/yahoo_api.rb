@@ -71,7 +71,8 @@ class YahooApi
 		result["pro_player"]["season"] = data["fantasy_content"]["player"][1]["player_stats"]["0"]["season"] # TODO
 		result["player_stats"] = stats_data
 
-		Rails.logger.info "The resulting mess is #{result}"
+		Rails.logger.info "The resulting mess is #{result} \n\n stats data: #{stats_data}"
+		R
 
 		result
 	end

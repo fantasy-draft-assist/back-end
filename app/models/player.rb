@@ -23,6 +23,7 @@ class Player < ActiveRecord::Base
 												   pro_team_id: pro_team.id,
 				                                   season: data["pro_player"]["season"])
 			pro_player.player_stat = PlayerStat.create(data["stats"])
+			fight
 		end
 	end
 end
