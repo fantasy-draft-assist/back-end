@@ -62,10 +62,12 @@ class YahooApi
 		result["headshot_url"] = player_data["headshot"]["url"]
 		result["positions"] = player_data["eligible_positions"][0]["position"]
 		result["pro_team"] = {}
-		result["pro_team"]["name"] = player_data["editorial_team_full_name"] # TODO
-		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] # TODO
-		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"] # TODO
+		result["pro_team"]["name"] = player_data["editorial_team_full_name"] 
+		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] 
+		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"]
 		result["pro_player"] = {}
+		result["pro_player"]["season"] = {}
+		Rails.logger.info "Pro Player is #{result["pro_player"]}\n\nSeason is #{result["pro_player"]["season"]}\n\nData is #{data["fantasy_content"]["player"][1]["player_stats"][0]["season"]}"
 		result["pro_player"]["season"] = data["fantasy_content"]["player"][1]["player_stats"][0]["season"] # TODO
 		result["player_stats"] = stats_data
 
