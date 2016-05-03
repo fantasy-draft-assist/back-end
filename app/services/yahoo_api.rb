@@ -57,28 +57,28 @@ class YahooApi
 		player_data = flatten_hashes(player_array)
 		stats_data = hashify_stats(stats_array)
 
-		# result = { "player_name" => player_data["name"]["full"], "yahoo_player_id" => player_data["player_id"], 
-		# 	"uniform_number" => player_data["uniform_number"], "headshot_url" => player_data["headshot"]["url"],
-		# 	"positions" => player_data["eligible_positions"]["position"], "player_stats" => stats_data, 
-		# 	"pro_team" => { "name" => player_data["editorial_team_full_name"], 
-		# 					"abbreviation" => player_data["editorial_team_abbr"],
-		# 					"yahoo_team_id" => player_data["editorial_team_key"]
-		# 	 },
-		# 	"pro_player" => { "season" => stats_data[0]["season"] },
-		# 	"player_stats" => stats_data
-		# 	}
+		result = { "player_name" => player_data["name"]["full"], "yahoo_player_id" => player_data["player_id"], 
+			"uniform_number" => player_data["uniform_number"], "headshot_url" => player_data["headshot"]["url"],
+			"positions" => player_data["eligible_positions"]["position"], "player_stats" => stats_data, 
+			"pro_team" => { "name" => player_data["editorial_team_full_name"], 
+							"abbreviation" => player_data["editorial_team_abbr"],
+							"yahoo_team_id" => player_data["editorial_team_key"]
+			 },
+			"pro_player" => { "season" => stats_data[0]["season"] },
+			"player_stats" => stats_data
+			}
 
-		result["player_name"] = player_data["name"]["full"]
-		result["yahoo_player_id"] = player_data["player_id"]
-		result["uniform_number"] = player_data["uniform_number"]
-		result["headshot_url"] = player_data["headshot"]["url"]
-		result["positions"] = player_data["eligible_positions"]["position"]
-		result["pro_team"] = {}
-		result["pro_team"]["name"] = player_data["editorial_team_full_name"] # TODO
-		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] # TODO
-		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"] # TODO
-		result["pro_player"]["season"] = stats_data[0]["season"] # TODO
-		result["player_stats"] = stats_data
+		# result["player_name"] = player_data["name"]["full"]
+		# result["yahoo_player_id"] = player_data["player_id"]
+		# result["uniform_number"] = player_data["uniform_number"]
+		# result["headshot_url"] = player_data["headshot"]["url"]
+		# result["positions"] = player_data["eligible_positions"]["position"]
+		# result["pro_team"] = {}
+		# result["pro_team"]["name"] = player_data["editorial_team_full_name"] # TODO
+		# result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] # TODO
+		# result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"] # TODO
+		# result["pro_player"]["season"] = stats_data[0]["season"] # TODO
+		# result["player_stats"] = stats_data
 
 		Rails.logger.info "The resulting mess is #{result}"
 
