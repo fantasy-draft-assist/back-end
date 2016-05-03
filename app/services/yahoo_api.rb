@@ -145,20 +145,22 @@ class YahooApi
 			stat_key = stat["stat"]["stat_id"].to_i
 			result_key = STATS_MAP[stat_key]
 			value = stat["stat"]["value"]
-			result[result_key] = value
+			if result_key
+				result[result_key] = value
+			end
 		end
 
 		result
-		Rails.logger.warn"The hashified stats are #{result}"
 	end
 
 	def flatten_hashes(hashes)
+		Rails.logger.info "The unflattened hash is #{hashes}"
 		result = {}
 		hashes.each do |hash|
-			result["#{hash}"] = hash
+			result.merge!(hash) if hash.is_a?(Hash)
 		end
 		result
-		Rails.logger.info"The flattened hash is #{result}"
+		Rails.logger.info "The flattened hash is #{result}"
 	end
 
 	def update_user_token(response)
