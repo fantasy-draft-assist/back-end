@@ -9,14 +9,19 @@ class Player < ActiveRecord::Base
 
 	def self.import_from_json(data)
 		ActiveRecord::Base.transaction do
-			player = Player.find_or_create_by(player_name: data["name"],
-				                              yahoo_player_id: data["yahoo_id"])
+			player = Player.find_or_create_by(first_name: data["first_name"],
+											  last_name: data["last_name"],
+				                              yahoo_player_id: data["yahoo_id"],
+				                              headshot_url: data["headshot_url"],
+				                              uniform_number: data["uniform_number"],
+				                              positions: data["positions"])
 			team_data = data["pro_team"]
 			pro_team = ProTeam.find_or_create_by(name: team_data["name"],
 				                                 abbreviation: team_data["abbreviation"],
 				                                 yahoo_team_id: team_data["yahoo_id"])
-			pro_player = player.pro_players.new(pro_team_id: pro_team.id,
-				                                season: data["year"])
+			pro_player = player.pro_players.new(player_id: player.id
+												pro_team_id: pro_team.id,
+				                                season: data["pro_player"]["season"])
 			stats = player.stats.new(data["stats"])
 			player.save
 		end

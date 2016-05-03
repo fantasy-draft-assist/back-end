@@ -55,7 +55,8 @@ class YahooApi
 		stats_data = hashify_stats(stats_array)
 
 		result = {}
-		result["player_name"] = player_data["name"]["full"]
+		result["first_name"] = player_data["name"]["first"]
+		result["last_name"] = player_data["name"]["last"]
 		result["yahoo_player_id"] = player_data["player_id"]
 		result["uniform_number"] = player_data["uniform_number"]
 		result["headshot_url"] = player_data["headshot"]["url"]
@@ -65,7 +66,6 @@ class YahooApi
 		result["pro_team"]["abbreviation"] = player_data["editorial_team_abbr"] 
 		result["pro_team"]["yahoo_team_id"] = player_data["editorial_team_key"]
 		result["pro_player"] = {}
-		result["pro_player"]["season"] = {}
 		result["pro_player"]["season"] = data["fantasy_content"]["player"][1]["player_stats"]["0"]["season"] # TODO
 		result["player_stats"] = stats_data
 
