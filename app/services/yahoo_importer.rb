@@ -19,7 +19,6 @@ class YahooImporter
 					data = @api.pull_stats(season, @count)
 					next unless data
 					Player.import_from_json(data) #or dump to file??
-					Rails.logger.warn "Playerdata is #{data}"
 					sleep 0.5.seconds
 				end
 			end
