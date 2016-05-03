@@ -11,10 +11,10 @@ class Player < ActiveRecord::Base
 		ActiveRecord::Base.transaction do
 			player = Player.find_or_create_by(first_name: data["first_name"],
 											  last_name: data["last_name"],
-				                              yahoo_player_id: data["yahoo_player_id"],
-				                              headshot_url: data["headshot_url"],
-				                              uniform_number: data["uniform_number"],
-				                              positions: data["positions"])
+				                              yahoo_player_id: data["yahoo_player_id"])
+			player.update(headshot_url: data["headshot_url"],
+				          uniform_number: data["uniform_number"],
+				          positions: data["positions"])
 			team_data = data["pro_team"]
 			pro_team = ProTeam.find_or_create_by(name: team_data["name"],
 				                                 abbreviation: team_data["abbreviation"],
