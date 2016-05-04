@@ -5,18 +5,23 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  ### REGISTRATION/LOGIN ROUTES
+
   post "registration", to: "registrations#create"
   post "login", to: "registrations#login"
   delete "registration", to: "registrations#destroy"
 
+  ### OAUTH ROUTES
+
   get 'oauth/:user_id', to: 'oauth#new', as: 'oauth' # oauth_url oauth_path
   get 'oauth/:user_id/authorize', to: 'oauth#create', as: 'authorize'
 
-  get ':user_id/stats/:game_key/:player_key', to: 'player#one'
-  get ':user_id/league/:game_key/:league_key', to: 'player#league'
-  get ':user_id/team/:game_key/:league_key/:team_key', to: 'player#team'
-  get ':user_id/transactions/:game_key/:league_key', to: 'player#transactions'
-  get ':user_id/scrape', to: 'player#scraper'
+  ### STRAIGHT TO BROWSER ROUTES
+
+  get ':user_id/stats/:game_key/:player_key', to: 'player#bplayerpage'
+  get ':user_id/league/:game_key/:league_key', to: 'player#bleague'
+  get ':user_id/team/:game_key/:league_key/:team_key', to: 'player#bteam'
+  get ':user_id/transactions/:game_key/:league_key', to: 'player#btransactions'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

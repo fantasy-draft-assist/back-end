@@ -11,8 +11,6 @@ class YahooImporter
 				Rails.logger.info "Token is about to expire: #{@api.token_expires_at}"
 				@api.refresh_token!
 				Rails.logger.info "Token has been refreshed: #{@api.token_expires_at}"
-			elsif (@count % 2500).zero? && @count != 0
-				sleep 10.minutes
 			else
 				@count += 1
 				seasons.each do |season|
