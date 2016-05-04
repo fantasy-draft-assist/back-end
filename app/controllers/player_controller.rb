@@ -11,6 +11,7 @@ class PlayerController < ApplicationController
 			render "one.json.jbuilder", status: :ok
 		else
 			render json: "Player Not Found For This Season", status: :not_found
+		end
 	end
 
 	def index
