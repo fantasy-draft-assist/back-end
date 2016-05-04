@@ -16,12 +16,18 @@ Rails.application.routes.draw do
   get 'oauth/:user_id', to: 'oauth#new', as: 'oauth' # oauth_url oauth_path
   get 'oauth/:user_id/authorize', to: 'oauth#create', as: 'authorize'
 
+  ### METHODS TO FROND END
+
+  get 'player/:yahoo_player_id/:season' to: 'player#one'
+  get "players", to: "player#index"
+
+
   ### STRAIGHT TO BROWSER ROUTES
 
-  get ':user_id/stats/:game_key/:player_key', to: 'player#bplayerpage'
-  get ':user_id/league/:game_key/:league_key', to: 'player#bleague'
-  get ':user_id/team/:game_key/:league_key/:team_key', to: 'player#bteam'
-  get ':user_id/transactions/:game_key/:league_key', to: 'player#btransactions'
+  get 'yahoo/:user_id/stats/:game_key/:player_key', to: 'player#bplayerpage'
+  get 'yahoo/:user_id/league/:game_key/:league_key', to: 'player#bleague'
+  get 'yahoo/:user_id/team/:game_key/:league_key/:team_key', to: 'player#bteam'
+  get 'yahoo/:user_id/transactions/:game_key/:league_key', to: 'player#btransactions'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

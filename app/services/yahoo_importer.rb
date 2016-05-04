@@ -2,7 +2,7 @@ class YahooImporter
 
 	def initialize(api)
 		@api = api
-		@count = 1993
+		@count = 2428
 	end
 
 	def scrape_stats(seasons, max_player_id)
