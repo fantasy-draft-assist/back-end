@@ -4,7 +4,7 @@ class PlayerController < ApplicationController
 
 	def one
 		@player = Player.find_by(yahoo_player_id: params["yahoo_player_id"])
-		@pro_player = @player.find_by(season: params["season"])
+		@pro_player = @player.pro_players.find_by(season: params["season"])
 		@pro_team = @pro_player.pro_team
 		@player_stat = @pro_player.player_stat
 		if @player
