@@ -18,16 +18,16 @@ Rails.application.routes.draw do
 
   ### METHODS TO FROND END
 
-  get 'player/:yahoo_player_id/:season', to: 'player#one'
-  get "players", to: "player#index"
+  get 'players/:yahoo_player_id/:season', to: 'players#one'
+  get "players", to: "players#index"
 
 
   ### STRAIGHT TO BROWSER ROUTES
 
-  get 'yahoo/:user_id/stats/:game_key/:player_key', to: 'player#bplayerpage'
-  get 'yahoo/:user_id/league/:game_key/:league_key', to: 'player#bleague'
-  get 'yahoo/:user_id/team/:game_key/:league_key/:team_key', to: 'player#bteam'
-  get 'yahoo/:user_id/transactions/:game_key/:league_key', to: 'player#btransactions'
+  get 'yahoo/:user_id/stats/:game_key/:player_key', to: 'players#bplayerpage'
+  get 'yahoo/:user_id/league/:game_key/:league_key', to: 'players#bleague'
+  get 'yahoo/:user_id/team/:game_key/:league_key/:team_key', to: 'players#bteam'
+  get 'yahoo/:user_id/transactions/:game_key/:league_key', to: 'players#btransactions'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

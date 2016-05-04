@@ -1,4 +1,4 @@
-class PlayerController < ApplicationController
+class PlayersController < ApplicationController
 
 	### methods to front end
 
