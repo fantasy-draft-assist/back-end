@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   ### METHODS TO FROND END
 
-  get 'players/:yahoo_player_id/:season', to: 'players#one' as: 'player'
+  get 'players/:yahoo_player_id/:season', to: 'players#one', as: 'player'
   get 'players/index/:season', to: 'players#index'
 
 
