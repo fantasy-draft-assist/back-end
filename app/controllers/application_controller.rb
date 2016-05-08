@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
+    binding.pry
   	unless current_user
   		render json: { errors: "You Must Log In First!" },
   			status: :unauthorized
