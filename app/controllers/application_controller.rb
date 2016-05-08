@@ -8,11 +8,9 @@ class ApplicationController < ActionController::Base
   	if token
   		User.find_by(auth_token: token)
   	end
-    binding.pry
   end
 
   def authenticate!
-    binding.pry
   	unless current_user
   		render json: { errors: "You Must Log In First!" },
   			status: :unauthorized
