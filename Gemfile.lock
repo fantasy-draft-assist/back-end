@@ -93,6 +93,10 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
+    pg_search (1.0.5)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -181,6 +185,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   pg
+  pg_search
   pry
   rack-cors
   rails (= 4.2.6)
