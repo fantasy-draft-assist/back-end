@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-	before_action :authenticate!, except: [:index, :season]
+	before_action :authenticate!
 
 	### methods to front end
 
