@@ -18,7 +18,7 @@ class PlayersController < ApplicationController
 	def one_all_seasons
 		@player = Player.find_by(yahoo_player_id: params["yahoo_player_id"])
 		@pro_players = @player.pro_players.includes(:player_stat)
-		@player_stats = @pro_players.player_stat
+		@player_stats = @pro_players.player_stats
 		@pro_team = @pro_players.first.pro_team
 		#@player_stats = @pro_players.map { |e| e.player_stat  }
 		if @player
