@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   # one player data
   get 'players/:yahoo_player_id/:season', to: 'players#one', as: 'player_season'
-  get 'players/:yahoo_player_id', to 'players#one_all_seasons', as: 'player'
+  get 'players/:yahoo_player_id', to: 'players#one_all_seasons', as: 'player'
   # all players data 
   get 'players/index', to: 'players#index'
   get 'players/index/:season', to: 'players#season'
