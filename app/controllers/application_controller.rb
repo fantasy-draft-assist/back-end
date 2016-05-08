@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-  	token = request.headers["X-Auth-Token"]
+  	token = request.headers["Internal_Auth"]
   	if token
   		User.find_by(auth_token: token)
   	end
