@@ -29,15 +29,14 @@ class PlayersController < ApplicationController
 
 	def index
 		@players = Kaminari.paginate_array(Player.includes(:pro_players).page(params["page"]).per(25))
-		binding.pry
 		render json: @players
-
 	end
 
 	def season
-		# @players = Player.includes(:pro_players)
-		@players = ProPlayer.includes(:player_stat, :pro_team).where(season: params[:season])
-		render json: @players
+		@players = Player.includes(:pro_players)
+		@pro_players = ProPlayer.where(season: params["season"]).includes(:player_stat)
+		@season = Kaminari.paginate_array(@pro_players).page(params["page"]).per(25)
+		render json: @season
 	end
 
 	### Straight to browser methods
