@@ -1,4 +1,5 @@
 class OauthController < ApplicationController
+	before_action :authenticate!
 
 	def new
 		@user = User.find(params[:user_id])

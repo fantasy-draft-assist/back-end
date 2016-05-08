@@ -17,9 +17,17 @@ Rails.application.routes.draw do
   get 'oauth/:user_id/authorize', to: 'oauth#create', as: 'authorize'
 
   ### METHODS TO FROND END
-
+  # one player data
   get 'players/:yahoo_player_id/:season', to: 'players#one', as: 'player'
-  get 'players/index/:season', to: 'players#index'
+  # all players data 
+  get 'players/index', to: 'players#index'
+  get 'players/index/:season', to: 'players#season'
+
+  resources :leagues
+
+  resources :teams do
+    resources :fantasy_players
+  end
 
 
   ### STRAIGHT TO BROWSER ROUTES

@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+	before_action :authenticate!, except: [:index]
 
 	### methods to front end
 
@@ -15,8 +16,12 @@ class PlayersController < ApplicationController
 	end
 
 	def index
+		@players = ProPlayer.includes(:player_stat, :pro_team)
+	end
+
+	def season
 		# @players = Player.includes(:pro_players)
-		@players = ProPlayer.includes(:player_stat).where(season: params[:season])
+		@players = ProPlayer.includes(:player_stat, :pro_team).where(season: params[:season])
 		render json: @players
 	end
 
