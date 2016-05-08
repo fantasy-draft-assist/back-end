@@ -31,6 +31,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 #httplog logs outgoing HTTP requests made from application
 gem 'httplog'
+# Add Kaminari for Pagination!
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

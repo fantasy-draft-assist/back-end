@@ -28,8 +28,10 @@ class PlayersController < ApplicationController
 	end
 
 	def index
-		@players = ProPlayer.includes(:player_stat, :pro_team)
+		@players = Kaminari.paginate_array(Player.includes(:pro_players).page(params["page"]).per(25))
+		binding.pry
 		render json: @players
+
 	end
 
 	def season

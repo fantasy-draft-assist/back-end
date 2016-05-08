@@ -18,12 +18,13 @@ Rails.application.routes.draw do
 
   ### METHODS TO FRONT END
 
+    # all players data 
+  get 'players/index/:page', to: 'players#index'
+  get 'players/index/:season', to: 'players#season'
+
   # one player data
   get 'players/:yahoo_player_id/:season', to: 'players#one', as: 'player_season'
   get 'players/:yahoo_player_id', to: 'players#one_all_seasons'
-  # all players data 
-  get 'players/index', to: 'players#index'
-  get 'players/index/:season', to: 'players#season'
 
   resources :leagues
 
