@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   	if token
   		User.find_by(auth_token: token)
   	end
+    binding.pry
   end
 
   def authenticate!
