@@ -15,6 +15,18 @@ class PlayersController < ApplicationController
 		end
 	end
 
+	def one_all_seasons
+		@player = Player.find_by(yahoo_player_id: params["yahoo_player_id"])
+		@pro_players = @player.pro_players.all
+		@pro_team = @pro_player.first.pro_team
+		@player_stats = @pro_players.map { |e| e.player_stat  }
+		if @player
+			render "oneseason.json.jbuilder", status: :ok
+		else
+			render json: "Player Not Found.", status: :not_found
+		end
+	end
+
 	def index
 		@players = ProPlayer.includes(:player_stat, :pro_team)
 		render json: @players

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'oauth/:user_id/authorize', to: 'oauth#create', as: 'authorize'
 
   ### METHODS TO FROND END
+  
   # one player data
   get 'players/:yahoo_player_id/:season', to: 'players#one', as: 'player'
   # all players data 
