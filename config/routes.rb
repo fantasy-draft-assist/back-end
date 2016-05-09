@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   # one player data
   get 'players/:yahoo_player_id/:season', to: 'players#one', as: 'player_season'
-  get 'players/one:yahoo_player_id', to: 'players#one_all_seasons'
+  get 'players/one/:yahoo_player_id', to: 'players#one_all_seasons'
 
   # search a player
    get "players/search", to: "search#player_search", as: "player_search"
