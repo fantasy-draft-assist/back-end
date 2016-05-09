@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506150805) do
+ActiveRecord::Schema.define(version: 20160509004441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,37 +36,38 @@ ActiveRecord::Schema.define(version: 20160506150805) do
     t.integer  "team_count"
     t.integer  "player_count"
     t.integer  "goalie_count"
-    t.boolean  "games_played"
-    t.boolean  "goals"
-    t.boolean  "assists"
-    t.boolean  "points"
-    t.boolean  "plus_minus"
-    t.boolean  "penalty_minutes"
-    t.boolean  "powerplay_goals"
-    t.boolean  "powerplay_assists"
-    t.boolean  "powerplay_points"
-    t.boolean  "shorthanded_goals"
-    t.boolean  "shorthanded_assists"
-    t.boolean  "shorthanded_points"
-    t.boolean  "game_winning_goals"
-    t.boolean  "shots_on_goal"
-    t.boolean  "shot_percentage"
-    t.boolean  "faceoffs_won"
-    t.boolean  "faceoffs_lost"
-    t.boolean  "games_started"
-    t.boolean  "wins"
-    t.boolean  "losses"
-    t.boolean  "goals_against"
-    t.boolean  "goals_against_average"
-    t.boolean  "shots_against"
-    t.boolean  "saves"
-    t.boolean  "save_percentage"
-    t.boolean  "shutouts"
-    t.boolean  "minutes_played"
-    t.boolean  "hits"
-    t.boolean  "blocks"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.boolean  "games_played",          default: false
+    t.boolean  "goals",                 default: false
+    t.boolean  "assists",               default: false
+    t.boolean  "points",                default: false
+    t.boolean  "plus_minus",            default: false
+    t.boolean  "penalty_minutes",       default: false
+    t.boolean  "powerplay_goals",       default: false
+    t.boolean  "powerplay_assists",     default: false
+    t.boolean  "powerplay_points",      default: false
+    t.boolean  "shorthanded_goals",     default: false
+    t.boolean  "shorthanded_assists",   default: false
+    t.boolean  "shorthanded_points",    default: false
+    t.boolean  "game_winning_goals",    default: false
+    t.boolean  "shots_on_goal",         default: false
+    t.boolean  "shot_percentage",       default: false
+    t.boolean  "faceoffs_won",          default: false
+    t.boolean  "faceoffs_lost",         default: false
+    t.boolean  "games_started",         default: false
+    t.boolean  "wins",                  default: false
+    t.boolean  "losses",                default: false
+    t.boolean  "goals_against",         default: false
+    t.boolean  "goals_against_average", default: false
+    t.boolean  "shots_against",         default: false
+    t.boolean  "saves",                 default: false
+    t.boolean  "save_percentage",       default: false
+    t.boolean  "shutouts",              default: false
+    t.boolean  "minutes_played",        default: false
+    t.boolean  "hits",                  default: false
+    t.boolean  "blocks",                default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "user_id"
   end
 
   create_table "player_stats", force: :cascade do |t|

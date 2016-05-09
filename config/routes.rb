@@ -11,22 +11,26 @@ Rails.application.routes.draw do
   post "login", to: "registrations#login"
   delete "registration", to: "registrations#destroy"
 
-  ### OAUTH ROUTES
+  ### League Settings Route
+  put "settings", to: "leagues#update"
+
+  ### YAHOO OAUTH ROUTES
 
   get 'oauth/:user_id', to: 'oauth#new', as: 'oauth' # oauth_url oauth_path
   get 'oauth/:user_id/authorize', to: 'oauth#create', as: 'authorize'
 
   ### METHODS TO FRONT END
 
-    # all players data 
+  # all players data 
   get 'players/index/:page', to: 'players#index'
-  get 'players/index/:season', to: 'players#season'
+  get 'players/index/season/:season/:page', to: 'players#season'
 
   # one player data
   get 'players/:yahoo_player_id/:season', to: 'players#one', as: 'player_season'
-  get 'players/:yahoo_player_id', to: 'players#one_all_seasons'
+  get 'players/one:yahoo_player_id', to: 'players#one_all_seasons'
 
-  resources :leagues
+  # search a player
+   get "players/search", to: "search#player_search", as: "player_search"
 
   resources :teams do
     resources :fantasy_players
