@@ -3,6 +3,11 @@ class Player < ActiveRecord::Base
 	has_many :pro_teams, through: :pro_players
 	has_many :player_stats, through: :pro_players, dependent: :destroy
 
+	include PgSearch
+
+	pg_search_scope :fname, against: :first_name
+	pg_search_scope :lname, against: :last_name
+
 	def full_name
 		"#{self.first_name} #{self.last_name}"
 	end

@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
 	has_many :teams
 	has_many :drafts
+	has_one  :league
 
 	validates :email, presence: true, uniqueness: true,
 		format: {
