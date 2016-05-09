@@ -8,6 +8,7 @@ class RegistrationsController < ApplicationController
 						favorite_team: params["favorite_team"])
 		@user.ensure_auth_token
 		if @user.save
+			@league = League.new(name: params["league_name"])
 			render json: { user: @user.as_json(only:
 								[:username, :email, :auth_token] )},
 				status: :created
