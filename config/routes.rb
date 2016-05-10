@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   # search a player
    get "players/search", to: "search#player_search", as: "player_search"
 
+#
   resources :teams do
     resources :fantasy_players
   end
