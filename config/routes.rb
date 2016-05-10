@@ -23,7 +23,6 @@ Rails.application.routes.draw do
 
   # all players data 
   get 'players/index/:season/:stat_name/:page', to: 'players#index'
-  get 'players/index/season/:season/:page', to: 'players#season'
 
   # one player data
   get 'players/one/:yahoo_player_id/:season', to: 'players#one', as: 'player_season'
