@@ -29,7 +29,7 @@ class PlayersController < ApplicationController
 
 	def index
 		stat_name = "player_stats.#{params[:stat_name]}"
-		@pro_players = ProPlayer.includes(:player, :player_stat)
+		@pro_players = ProPlayer.includes(:player, :player_stat, :pro_team)
 		@pro_players = @pro_players.where("pro_players.season = ?", params[:season])
 		@pro_players = @pro_players.where.not(stat_name => nil)
 		@pro_players = @pro_players.order("#{stat_name} DESC").page(1).per(25)
