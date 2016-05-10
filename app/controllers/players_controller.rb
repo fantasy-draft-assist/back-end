@@ -33,7 +33,7 @@ class PlayersController < ApplicationController
 		@pro_players = @pro_players.where("pro_players.season = ?", params[:season])
 		@pro_players = @pro_players.where.not(stat_name => nil)
 		@pro_players = @pro_players.order("#{stat_name} DESC").page(1).per(25)
-		render "allplayers.json.jbuilder"
+		render "index.json.jbuilder"
 	end
 
 	### Straight to browser methods
