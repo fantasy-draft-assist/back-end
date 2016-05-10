@@ -458,6 +458,22 @@ season: integer (use actual years in YYYY format)
 }
 ```
 
+#### get 'players/index/:season/:stat_name/:page'
+
+*this route will return an entire season of player data including stats, sorted by stat specified*
+
+Params:
+season: string - specify what year of stats you would like to see (2012-2015, YYYY format)
+stat_name: string - specify what player stats you would like the results to be sorted by
+page: integer - specify what page of results you would like to view
+
+i.e.
+
+```
+	/players/index/2015/goals/1
+```
+	Will return you all player data for 2015 sorted by number of goals descending
+
 #### get players/search
 
 *this route is to search for a player by first name or last name*
