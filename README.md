@@ -155,6 +155,54 @@ Params:
 * hits: boolean
 * blocks: boolean
 
+#### GET /settings
+
+*this route is for retrieving league settings without updating them*
+
+**Response**
+
+```
+{
+  "id": 2,
+  "name": "Paintball",
+  "team_count": 8,
+  "player_count": 20,
+  "goalie_count": 2,
+  "games_played": true,
+  "goals": true,
+  "assists": true,
+  "points": true,
+  "plus_minus": true,
+  "penalty_minutes": true,
+  "powerplay_goals": false,
+  "powerplay_assists": false,
+  "powerplay_points": true,
+  "shorthanded_goals": false,
+  "shorthanded_assists": false,
+  "shorthanded_points": false,
+  "game_winning_goals": false,
+  "shots_on_goal": true,
+  "shot_percentage": false,
+  "faceoffs_won": false,
+  "faceoffs_lost": false,
+  "games_started": false,
+  "wins": true,
+  "losses": false,
+  "goals_against": false,
+  "goals_against_average": true,
+  "shots_against": false,
+  "saves": true,
+  "save_percentage": true,
+  "shutouts": true,
+  "minutes_played": false,
+  "hits": true,
+  "blocks": true,
+  "created_at": "2016-05-09T00:03:49.577Z",
+  "updated_at": "2016-05-09T01:18:37.162Z",
+  "user_id": 7
+}
+```
+
 #### Routes to get One Player's Data
 #### get players/one/:yahoo_player_id/
 
