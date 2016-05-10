@@ -28,8 +28,14 @@ class PlayersController < ApplicationController
 	end
 
 	def index
-		@players = Kaminari.paginate_array(Player.includes(:pro_players).page(params["page"]).per(25))
+		@players = Player.joins(:player_stats).where("pro_players.season = #{params[:season]} AND player_stats.#{params[:stat_name]} IS NOT NULL").order("player_stats.#{params[:stat_name]} DESC").page(1).per(25)
+		
 		render json: @players
+		# if @players
+		# 	render "allplayers.json.jbuilder", status: :ok
+		# else
+		# 	render json: "Something is wrong.", status: :not_found
+		# end
 	end
 
 	def season

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   ### METHODS TO FRONT END
 
   # all players data 
-  get 'players/index/:page', to: 'players#index'
+  get 'players/index/:season/:stat_name/:page', to: 'players#index'
   get 'players/index/season/:season/:page', to: 'players#season'
 
   # one player data
