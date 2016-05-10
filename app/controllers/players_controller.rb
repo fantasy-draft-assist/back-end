@@ -28,20 +28,12 @@ class PlayersController < ApplicationController
 	end
 
 	def index
-		@players = Player.joins(:player_stats).where("pro_players.season = #{params[:season]} AND player_stats.#{params[:stat_name]} IS NOT NULL").order("player_stats.#{params[:stat_name]} DESC").page(1).per(25)
-
-		if @players
-			render json: @players.all.to_json(:include => :player_stats)
-		else
-			render json: "Something is wrong.", status: :not_found
-		end
-	end
-
-	def season
-		@players = Player.includes(:pro_players)
-		@pro_players = ProPlayer.where(season: params["season"]).includes(:player_stat)
-		@season = Kaminari.paginate_array(@pro_players).page(params["page"]).per(25)
-		render json: @season
+		stat_name = "player_stats.#{params[:stat_name]}"
+		@pro_players = ProPlayer.includes(:player, :player_stat)
+		@pro_players = @pro_players.where("pro_players.season = ?", params[:season])
+		@pro_players = @pro_players.where.not(stat_name => nil)
+		@pro_players = @pro_players.order("#{stat_name} DESC").page(1).per(25)
+		render "allplayers.json.jbuilder"
 	end
 
 	### Straight to browser methods
