@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   ### League Settings Route
   put "settings", to: "leagues#update"
+  get "settings", to: "leagues#show"
 
   ### YAHOO OAUTH ROUTES
 

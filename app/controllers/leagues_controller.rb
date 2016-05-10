@@ -39,4 +39,10 @@ class LeaguesController < ApplicationController
 		render json: @league
 	end
 
+      def show
+            @league = League.find_by(user_id: current_user.id)
+
+            render json: @league
+      end
+
 end
