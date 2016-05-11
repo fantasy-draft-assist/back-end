@@ -42,7 +42,7 @@ class LeaguesController < ApplicationController
       def show
             @league = League.find_by(user_id: current_user.id)
 
-            render json: @league
+            render json: @league.as_json(except: [:created_at, :updated_at, :user_id])
       end
 
 end
