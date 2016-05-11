@@ -11,7 +11,6 @@ class RegistrationsController < ApplicationController
 			@league = League.create(name: params["league_name"], team_count: params["team_count"],
 							player_count: params["player_count"], goalie_count: params["goalie_count"],
 							user_id: @user.id)
-			binding.pry
 			render json: { 	user: @user.as_json(only:
 							[:username, :email, :auth_token, :favorite_team] ),
 							league: @league.as_json(only: 
