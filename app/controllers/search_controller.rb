@@ -1,8 +1,8 @@
 class SearchController < ApplicationController
 	def player_search
-    @players = Player.includes(:pro_players)
-    @players = @players.fname(params[:first_name]) if params[:first_name].present?
-    @players = @players.lname(params[:last_name]) if params[:last_name].present?
-    render json: @players
+    @players = Player.includes(:pro_players, :pro_teams)
+    @players = @players.search_by_name(params[:name]) if params[:name].present?
+
+    render "player_search.json.jbuilder"
   end
 end

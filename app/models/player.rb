@@ -5,8 +5,7 @@ class Player < ActiveRecord::Base
 
 	include PgSearch
 
-	pg_search_scope :fname, against: :first_name
-	pg_search_scope :lname, against: :last_name
+	pg_search_scope :search_by_name, against: [:first_name, :last_name]
 
 	def full_name
 		"#{self.first_name} #{self.last_name}"
