@@ -32,7 +32,7 @@ class PlayersController < ApplicationController
 		@pro_players = ProPlayer.includes(:player, :player_stat, :pro_team)
 		@pro_players = @pro_players.where("pro_players.season = ?", params[:season])
 		@pro_players = @pro_players.where.not(stat_name => nil)
-		@pro_players = @pro_players.order("#{stat_name} DESC").page(1).per(25)
+		@pro_players = @pro_players.order("#{stat_name} DESC")#.page(1).per(25)
 		render "index.json.jbuilder"
 	end
 
